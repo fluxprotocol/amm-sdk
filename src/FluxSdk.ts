@@ -1,10 +1,12 @@
 import { Account, Near, WalletConnection } from "near-api-js";
+
+import * as sdkUtils from './FluxSdkUtils';
 import { DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID, DEFAULT_SWAP_FEE } from "./config";
 import { ProtocolContract } from "./contracts/ProtocolContract";
 import { ConnectConfig, createConnectConfig } from "./models/ConnectConfig";
 import { createSdkConfig, SdkConfig } from "./models/SdkConfig";
 import { connectNear } from "./services/NearService";
-import { toToken } from "./services/TokenService";
+import calcDistributionHint from "./utils/calcDistributionHint";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -14,9 +16,13 @@ export default class FluxSdk {
     account?: Account;
     protocol?: ProtocolContract;
 
+    static get utils() {
+        return sdkUtils;
+    }
+
     /**
      * Creates an instance of FluxSdk.
-     * 
+     *
      * @param {SdkConfig} config
      * @memberof FluxSdk
      */
@@ -32,13 +38,10 @@ export default class FluxSdk {
      */
     async connect(config: Partial<ConnectConfig> = {}) {
         const connectConfig = createConnectConfig(config);
-    
+
         this.near = await connectNear(connectConfig, this.sdkConfig);
         this.walletConnection = connectConfig.walletInstance ?? new WalletConnection(this.near, this.sdkConfig.nullContractId);
         this.account = this.walletConnection.account();
-
-        if (!this.account) throw new Error('Account could not be found');
-
         this.protocol = new ProtocolContract(this.account, this.sdkConfig);
     }
 
@@ -123,7 +126,7 @@ export default class FluxSdk {
     }) {
         if (!this.protocol) throw new Error('Cannot create a market without connecting first');
 
-        this.protocol?.createMarket(
+        this.protocol.createMarket(
             market.description,
             market.outcomes,
             market.categories || [],
@@ -132,5 +135,30 @@ export default class FluxSdk {
             market.swapFee || DEFAULT_SWAP_FEE,
             market.collateralTokenId || DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID,
         );
+    }
+
+    /**
+     * Seeds the market pool
+     *
+     * @param {{
+     *         marketId: string,
+     *         totalIn: string,
+     *         weights: number[],
+     *     }} pool
+     * @memberof FluxSdk
+     */
+    seedPool(pool: {
+        marketId: string,
+        totalIn: string,
+        weights: number[],
+    }) {
+        const totalWeights = pool.weights.reduce((prev, current) => prev + current, 0);
+
+        if (totalWeights !== 100) throw new Error('Weights should equal 100 together');
+        if (!this.protocol) throw new Error('Cannot create a market without connecting first');
+
+        const denormWeights = calcDistributionHint(pool.weights);
+
+        this.protocol.seedPool(pool.marketId, pool.totalIn, denormWeights.map(w => w.toFixed(0)));
     }
 }

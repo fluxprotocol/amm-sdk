@@ -6,4 +6,7 @@ module.exports = {
     transform: {
         ...tsjPreset.transform,
     },
+    testPathIgnorePatterns: [
+        'dist',
+    ],
 };

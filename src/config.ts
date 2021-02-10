@@ -11,3 +11,4 @@ export const STORAGE_BASE = new Big('30000000000000000000000');
 export const MAX_GAS = new Big('300000000000000');
 export const DEFAULT_SWAP_FEE = toToken('2', 16);
 export const DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID = 'ft.flux-dev';
+export const DEFAULT_SLIPPAGE = 2;

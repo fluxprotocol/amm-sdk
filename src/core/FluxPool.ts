@@ -11,17 +11,7 @@ export default class FluxPool {
         this.tokensHolder = tokensHolder;
     }
 
-    /**
-     * Seeds the market pool
-     *
-     * @param {{
-     *         marketId: string,
-     *         totalIn: string,
-     *         weights: number[],
-     *     }} pool
-     * @memberof FluxSdk
-     */
-    seedPool(pool: {
+    async seedPool(pool: {
         marketId: string,
         totalIn: string,
         weights: number[],
@@ -33,18 +23,10 @@ export default class FluxPool {
 
         const denormWeights = calcDistributionHint(pool.weights);
 
-        this.protocol.seedPool(pool.marketId, pool.totalIn, denormWeights.map(w => w.toFixed(0)));
+        return this.protocol.seedPool(pool.marketId, pool.totalIn, denormWeights.map(w => w.toFixed(0)));
     }
 
-    /**
-     * Publish the pool (Only possible when the market was already seeded)
-     *
-     * @param {string} collateralTokenId
-     * @param {string} marketId
-     * @param {string} amountIn This should match the current total supply of the market
-     * @memberof FluxSdk
-     */
-    publishPool(collateralTokenId: string, marketId: string, amountIn: string) {
+    async publishPool(collateralTokenId: string, marketId: string, amountIn: string) {
         const tokenContract = this.tokensHolder.getTokenContract(collateralTokenId);
         const payload = JSON.stringify({
             function: 'publish',
@@ -53,7 +35,7 @@ export default class FluxPool {
             }
         });
 
-        tokenContract.transferWithVault(amountIn, payload);
+        return tokenContract.transferWithVault(amountIn, payload);
     }
 
     async joinPool(collateralTokenId: string, marketId: string, amountIn: string) {
@@ -66,5 +48,9 @@ export default class FluxPool {
         });
 
         return tokenContract.transferWithVault(amountIn, payload);
+    }
+
+    async exitPool(marketId: string, totalIn: string) {
+        return this.protocol.exitPool(marketId, totalIn);
     }
 }

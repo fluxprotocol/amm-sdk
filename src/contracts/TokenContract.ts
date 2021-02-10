@@ -10,7 +10,7 @@ export default class TokenContract {
         this.sdkConfig = sdkConfig;
         this.contract = new Contract(account, tokenAccountId, {
             viewMethods: ['get_balance'],
-            changeMethods: ['transfer_with_vault', 'register_account'],
+            changeMethods: ['transfer_with_vault'],
         });
     }
 
@@ -19,12 +19,12 @@ export default class TokenContract {
         return this.contract.get_balance({ account_id: accountId });
     }
 
-    async transferWithVault(amount: string, payload: string): Promise<void> {
+    async transferWithVault(amount: string, payload: string, storageCost = STORAGE_BASE): Promise<void> {
         // @ts-ignore
-        this.contract.transfer_with_vault({
+        return this.contract.transfer_with_vault({
             receiver_id: this.sdkConfig.protocolContractId,
             amount,
             payload,
-        }, MAX_GAS.toString(), STORAGE_BASE.toString());
+        }, MAX_GAS.toString(), storageCost.toString());
     }
 }

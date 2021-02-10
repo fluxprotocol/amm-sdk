@@ -9,6 +9,7 @@ import { connectNear } from "./services/NearService";
 import FluxPool from "./core/FluxPool";
 import TokensHolder from "./core/TokensHolder";
 import { FluxAccount } from "./core/FluxAccount";
+import FluxMarket from "./core/FluxMarket";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -19,6 +20,7 @@ export default class FluxSdk {
     pool?: FluxPool;
     tokens?: TokensHolder;
     account?: FluxAccount;
+    market?: FluxMarket;
 
     static get utils() {
         return sdkUtils;
@@ -51,6 +53,7 @@ export default class FluxSdk {
         this.account = new FluxAccount(this.tokens, this.walletConnection, this.sdkConfig);
         this.protocol = new ProtocolContract(nearAccount, this.sdkConfig);
         this.pool = new FluxPool(this.protocol, this.tokens);
+        this.market = new FluxMarket(this.protocol, this.tokens);
     }
 
     /**
@@ -123,7 +126,7 @@ export default class FluxSdk {
      *     }} market
      * @memberof FluxSdk
      */
-    createMarket(market: {
+    async createMarket(market: {
         description: string,
         outcomes: string[],
         categories?: string[],
@@ -132,17 +135,7 @@ export default class FluxSdk {
         swapFee?: string,
         collateralTokenId?: string,
     }) {
-        if (!this.protocol) throw new Error('Cannot create a market without connecting first');
-
-        this.protocol.createMarket(
-            market.description,
-            market.outcomes,
-            market.categories || [],
-            market.endDate,
-            market.extraInfo,
-            market.swapFee || DEFAULT_SWAP_FEE,
-            market.collateralTokenId || DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID,
-        );
+        return this.market?.createMarket(market);
     }
 
     /**
@@ -167,7 +160,7 @@ export default class FluxSdk {
      *     }} pool
      * @memberof FluxSdk
      */
-    seedPool(pool: {
+    async seedPool(pool: {
         marketId: string,
         totalIn: string,
         weights: number[],
@@ -183,7 +176,7 @@ export default class FluxSdk {
      * @param {string} amountIn This should match the current total supply of the market
      * @memberof FluxSdk
      */
-    publishPool(collateralTokenId: string, marketId: string, amountIn: string) {
+    async publishPool(collateralTokenId: string, marketId: string, amountIn: string) {
         this.pool?.publishPool(collateralTokenId, marketId, amountIn);
     }
 
@@ -195,7 +188,75 @@ export default class FluxSdk {
      * @param {string} amountIn
      * @memberof FluxSdk
      */
-    joinPool(collateralTokenId: string, marketId: string, amountIn: string) {
+    async joinPool(collateralTokenId: string, marketId: string, amountIn: string) {
         this.pool?.joinPool(collateralTokenId, marketId, amountIn);
+    }
+
+    /**
+     * Allows you to exit the pool for a specific market
+     *
+     * @param {string} marketId
+     * @param {string} totalIn Amount of pool tokens
+     * @return {Promise<void>}
+     * @memberof FluxSdk
+     */
+    async exitPool(marketId: string, totalIn: string) {
+        return this.pool?.exitPool(marketId, totalIn);
+    }
+
+    /**
+     * Buys a share for a specific outcome
+     *
+     * @param {{
+     *         collateralTokenId: string,
+     *         marketId: string,
+     *         outcomeId: number,
+     *         amountOut: string,
+     *         amountIn: string,
+     *         slippage?: number,
+     *     }} buyParams
+     * @memberof FluxSdk
+     */
+    async buy(buyParams: {
+        collateralTokenId: string,
+        marketId: string,
+        outcomeId: number,
+        amountOut: string,
+        amountIn: string,
+        slippage?: number,
+    }) {
+        return this.market?.buy(buyParams);
+    }
+
+    /**
+     * Sells shares for a specific outcome
+     *
+     * @param {{
+     *         marketId: string,
+     *         amountOut: string,
+     *         amountIn: string,
+     *         outcomeId: number,
+     *         slippage?: number,
+     *     }} sellParams
+     * @memberof FluxSdk
+     */
+    async sell(sellParams: {
+        marketId: string,
+        amountOut: string,
+        amountIn: string,
+        outcomeId: number,
+        slippage?: number,
+    }) {
+        return this.market?.sell(sellParams);
+    }
+
+    /**
+     * Allows you to claim your earnings after a market has ended
+     *
+     * @param {string} marketId
+     * @memberof FluxSdk
+     */
+    async claimEarnings(marketId: string) {
+        return this.market?.claimEarnings(marketId);
     }
 }

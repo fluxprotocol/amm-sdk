@@ -25,7 +25,7 @@ export class ProtocolContract {
         const storageRequired = STORAGE_BASE.mul(outcomes.length);
 
         // @ts-ignore
-        this.contract.create_market({
+        return this.contract.create_market({
             description,
             extra_info: extraInfo,
             outcomes: outcomes.length,
@@ -46,10 +46,35 @@ export class ProtocolContract {
         const storageRequired = new Big('80000000000000000000000').mul(denormWeights.length);
 
         // @ts-ignore
-        this.contract.seed_pool({
+        return this.contract.seed_pool({
             market_id: marketId,
             total_in: totalIn,
             denorm_weights: denormWeights,
         }, MAX_GAS.toString(), storageRequired.toString());
+    }
+
+    async exitPool(marketId: string, totalIn: string) {
+        // @ts-ignore
+        return this.contract.exit_pool({
+            market_id: marketId,
+            total_in: totalIn,
+        }, MAX_GAS.toString(), STORAGE_BASE.toString());
+    }
+
+    async sell(marketId: string, outcomeId: number, amountOut: string, amountIn: string) {
+        // @ts-ignore
+        return this.contract.sell({
+            market_id: marketId,
+            collateral_out: amountOut,
+            outcome_target: outcomeId,
+            max_shares_in: amountIn,
+        }, MAX_GAS.toString(), STORAGE_BASE.mul(2).toString())
+    }
+
+    async claimEarnings(marketId: string) {
+        // @ts-ignore
+        this.contract.claim_earnings({
+            market_id: marketId,
+        }, MAX_GAS, STORAGE_BASE)
     }
 }

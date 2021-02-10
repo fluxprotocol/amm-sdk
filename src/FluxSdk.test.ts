@@ -55,6 +55,7 @@ describe('FluxSdk', () => {
                 fluxSdk.signIn();
             };
 
+
             expect(result).toThrow(Error);
         });
     });

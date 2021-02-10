@@ -1,4 +1,5 @@
 import { Account, WalletConnection } from "near-api-js";
+import { AccountBalance } from "near-api-js/lib/account";
 import { SdkConfig } from "../models/SdkConfig";
 import TokensHolder from "./TokensHolder";
 
@@ -67,5 +68,9 @@ export class FluxAccount {
     async getTokenBalance(collateralTokenId: string, accountId: string): Promise<string> {
         const tokenContract = this.tokens.getTokenContract(collateralTokenId);
         return tokenContract.getBalance(accountId);
+    }
+
+    async getNearBalance(): Promise<AccountBalance> {
+        return this.walletConnection.account().getAccountBalance();
     }
 }

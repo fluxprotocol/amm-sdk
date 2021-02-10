@@ -1,7 +1,7 @@
 {
     "name": "amm-sdk",
     "version": "1.0.0",
-    "description": "",
+    "description": "Flux SDK that's using the Flux AMM Protocol",
     "main": "index.js",
     "scripts": {
         "test": "jest",

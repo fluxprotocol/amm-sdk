@@ -1,7 +1,6 @@
-import { Account, Near, WalletConnection } from "near-api-js";
+import { Near, WalletConnection } from "near-api-js";
 
 import * as sdkUtils from './core/FluxSdkUtils';
-import { DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID, DEFAULT_SWAP_FEE } from "./config";
 import { ProtocolContract } from "./contracts/ProtocolContract";
 import { ConnectConfig, createConnectConfig } from "./models/ConnectConfig";
 import { createSdkConfig, SdkConfig } from "./models/SdkConfig";
@@ -10,6 +9,12 @@ import FluxPool from "./core/FluxPool";
 import TokensHolder from "./core/TokensHolder";
 import { FluxAccount } from "./core/FluxAccount";
 import FluxMarket from "./core/FluxMarket";
+import { getMarketById, getMarkets, MarketFilters } from "./services/MarketService";
+import { Pagination } from "./models/Pagination";
+import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
+import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
+import { getAccountBalancesForMarket, getAccountInfo } from "./services/AccountService";
+import { AccountBalance as NearAccountBalance } from "near-api-js/lib/account";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -151,6 +156,17 @@ export default class FluxSdk {
     }
 
     /**
+     * Gets the current NEAR balance
+     *
+     * @return {(Promise<NearAccountBalance | undefined>)}
+     * @memberof FluxSdk
+     */
+    async getNearBalance(): Promise<NearAccountBalance> {
+        if (!this.account) throw new Error('Not connected');
+        return this.account.getNearBalance();
+    }
+
+    /**
      * Seeds the market pool
      *
      * @param {{
@@ -258,5 +274,54 @@ export default class FluxSdk {
      */
     async claimEarnings(marketId: string) {
         return this.market?.claimEarnings(marketId);
+    }
+
+    /**
+     * Gets markets
+     * Allows you to fetch expired, finalized and open markets.
+     *
+     * @param {MarketFilters} filters
+     * @return {Promise<Pagination<MarketGraphData>>}
+     * @memberof FluxSdk
+     */
+    async getMarkets(filters: MarketFilters = {}): Promise<Pagination<MarketGraphData>> {
+        return getMarkets(this.sdkConfig, filters);
+    }
+
+    /**
+     * Get a market
+     *
+     * @param {string} marketId
+     * @param {string} [accountId]
+     * @return {Promise<MarketDetailGraphData>}
+     * @memberof FluxSdk
+     */
+    async getMarketById(marketId: string, accountId?: string): Promise<MarketDetailGraphData> {
+        return getMarketById(this.sdkConfig, marketId, accountId);
+    }
+
+    /**
+     * Fetches the balances of a market for a specific account
+     *
+     * @param {string} marketId
+     * @param {string} accountId
+     * @return {Promise<AccountMarketBalanceGraphData>}
+     * @memberof FluxSdk
+     */
+    async getAccountBalancesForMarket(marketId: string, accountId: string): Promise<AccountMarketBalanceGraphData[]> {
+        return getAccountBalancesForMarket(this.sdkConfig, marketId, accountId);
+    }
+
+    /**
+     * Gets the balances and earned fees that the user has participated in
+     *
+     * @param {string} accountId
+     * @memberof FluxSdk
+     */
+    async getAccountInfo(accountId: string): Promise<{
+        balances: AccountBalance[],
+        earned_fees: AccountFeeBalance[];
+    }> {
+        return getAccountInfo(this.sdkConfig, accountId);
     }
 }

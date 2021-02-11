@@ -1,3 +1,5 @@
+import Big from "big.js";
+import { STORAGE_BASE } from "../config";
 import { ProtocolContract } from "../contracts/ProtocolContract";
 import calcDistributionHint from "../utils/calcDistributionHint";
 import TokensHolder from "./TokensHolder";
@@ -11,43 +13,29 @@ export default class FluxPool {
         this.tokensHolder = tokensHolder;
     }
 
-    async seedPool(pool: {
-        marketId: string,
-        totalIn: string,
-        weights: number[],
-    }) {
-        const totalWeights = pool.weights.reduce((prev, current) => prev + current, 0);
-
-        if (totalWeights !== 100) throw new Error('Weights should equal 100 together');
-        if (!this.protocol) throw new Error('Cannot create a market without connecting first');
-
-        const denormWeights = calcDistributionHint(pool.weights);
-
-        return this.protocol.seedPool(pool.marketId, pool.totalIn, denormWeights.map(w => w.toFixed(0)));
-    }
-
-    async publishPool(collateralTokenId: string, marketId: string, amountIn: string) {
+    async addLiquidity(collateralTokenId: string, marketId: string, amountIn: string, weights: number[] = []) {
         const tokenContract = this.tokensHolder.getTokenContract(collateralTokenId);
+        let storageRequired = STORAGE_BASE;
+        let weightIndication: string[] = [];
+
+        // Allow reseeding of markets
+        if (weights.length) {
+            const totalWeights = weights.reduce((prev, current) => prev + current, 0);
+            if (totalWeights !== 100) throw new Error('Weights should equal 100 together');
+
+            storageRequired = new Big('80000000000000000000000').mul(weights.length);
+            weightIndication = calcDistributionHint(weights).map(w => w.toFixed(0));
+        }
+
         const payload = JSON.stringify({
-            function: 'publish',
+            function: "add_liquidity",
             args: {
                 market_id: marketId,
+                weight_indication: weightIndication.length ? weightIndication : null,
             }
         });
 
-        return tokenContract.transferWithVault(amountIn, payload);
-    }
-
-    async joinPool(collateralTokenId: string, marketId: string, amountIn: string) {
-        const tokenContract = this.tokensHolder.getTokenContract(collateralTokenId);
-        const payload = JSON.stringify({
-            function: 'join_pool',
-            args: {
-                market_id: marketId,
-            }
-        });
-
-        return tokenContract.transferWithVault(amountIn, payload);
+        return tokenContract.transferWithVault(amountIn, payload, storageRequired);
     }
 
     async exitPool(marketId: string, totalIn: string) {

@@ -167,45 +167,17 @@ export default class FluxSdk {
     }
 
     /**
-     * Seeds the market pool
-     *
-     * @param {{
-     *         marketId: string,
-     *         totalIn: string,
-     *         weights: number[],
-     *     }} pool
-     * @memberof FluxSdk
-     */
-    async seedPool(pool: {
-        marketId: string,
-        totalIn: string,
-        weights: number[],
-    }) {
-        this.pool?.seedPool(pool);
-    }
-
-    /**
-     * Publish the pool (Only possible when the market was already seeded)
-     *
-     * @param {string} collateralTokenId
-     * @param {string} marketId
-     * @param {string} amountIn This should match the current total supply of the market
-     * @memberof FluxSdk
-     */
-    async publishPool(collateralTokenId: string, marketId: string, amountIn: string) {
-        this.pool?.publishPool(collateralTokenId, marketId, amountIn);
-    }
-
-    /**
-     * Joins a specific pool to provide liquidity
+     * Adds liquidity to the pool in exchange for pool tokens
+     * Adding the weights parameter is only possible when the total supply of the pool is 0
      *
      * @param {string} collateralTokenId
      * @param {string} marketId
      * @param {string} amountIn
+     * @param {number[]} weights the weights of the pool for each outcome. Together should equal 100(%)
      * @memberof FluxSdk
      */
-    async joinPool(collateralTokenId: string, marketId: string, amountIn: string) {
-        this.pool?.joinPool(collateralTokenId, marketId, amountIn);
+    async addLiquidity(collateralTokenId: string, marketId: string, amountIn: string, weights?: number[]) {
+        return this.pool?.addLiquidity(collateralTokenId, marketId, amountIn, weights);
     }
 
     /**

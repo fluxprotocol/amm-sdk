@@ -15,6 +15,9 @@ import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
 import { getAccountBalancesForMarket, getAccountInfo } from "./services/AccountService";
 import { AccountBalance as NearAccountBalance } from "near-api-js/lib/account";
+import { getPriceHistoryByMarketId, Period } from "./services/PriceHistoryService";
+import { PriceHistoryData } from "./models/PriceHistoryData";
+import { queryGraph } from "./services/GraphQLService";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -27,6 +30,13 @@ export default class FluxSdk {
     account?: FluxAccount;
     market?: FluxMarket;
 
+    /**
+     * Utils that can be used with your application
+     *
+     * @readonly
+     * @static
+     * @memberof FluxSdk
+     */
     static get utils() {
         return sdkUtils;
     }
@@ -295,5 +305,41 @@ export default class FluxSdk {
         earned_fees: AccountFeeBalance[];
     }> {
         return getAccountInfo(this.sdkConfig, accountId);
+    }
+
+    /**
+     * Gets the price history for a spec
+     *
+     * @param {string} marketId
+     * @param {Period} period
+     * @return {*}  {Promise<PriceHistoryData>}
+     * @memberof FluxSdk
+     */
+    async getPriceHistoryByMarketId(marketId: string, period: Period): Promise<PriceHistoryData[]> {
+        return getPriceHistoryByMarketId(this.sdkConfig, marketId, period);
+    }
+
+    /**
+     * Querys the GraphQL server
+     * Usefull when the default given querys are not enough and you want to fine tune your data
+     *
+     * @param {{
+     *         query: string,
+     *         operationName?: string,
+     *         variables?: {
+     *             [key: string]: any,
+     *         },
+     *     }} params
+     * @return {Promise<any>}
+     * @memberof FluxSdk
+     */
+    async query(params: {
+        query: string,
+        operationName?: string,
+        variables?: {
+            [key: string]: any,
+        },
+    }) {
+       queryGraph(this.sdkConfig.graphApiUrl, params);
     }
 }

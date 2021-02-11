@@ -9,9 +9,8 @@ async function main() {
         sdk.signIn();
     }
 
-    const r = await sdk.getAccountInfo("franklinwaller.testnet");
-
-    console.log('[] r -> ', r.earned_fees);
+    const r = await sdk.getPriceHistoryByMarketId('55', '1d');
+    console.log('[] r -> ', r);
 }
 
 main();

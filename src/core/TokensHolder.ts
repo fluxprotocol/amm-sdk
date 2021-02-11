@@ -3,7 +3,7 @@ import TokenContract from "../contracts/TokenContract";
 import { SdkConfig } from "../models/SdkConfig";
 
 export default class TokensHolder {
-    private tokens: Map<string, TokenContract> = new Map();
+    tokens: Map<string, TokenContract> = new Map();
     private account: Account;
     private sdkConfig: SdkConfig;
 

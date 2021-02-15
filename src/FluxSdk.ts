@@ -58,6 +58,10 @@ export default class FluxSdk {
      * @memberof FluxSdk
      */
     async connect(config: Partial<ConnectConfig> = {}) {
+        if (this.near) {
+            return;
+        }
+
         const connectConfig = createConnectConfig(config);
 
         this.near = await connectNear(connectConfig, this.sdkConfig);
@@ -110,11 +114,12 @@ export default class FluxSdk {
     /**
      * Gets the logged in account if it's available
      *
-     * @return {(string | undefined)}
+     * @return {(string)}
      * @memberof FluxSdk
      */
-    getAccountId(): string | undefined {
-        return this.account?.getAccountId();
+    getAccountId(): string {
+        if (!this.account) throw new Error('User is not signed in');
+        return this.account.getAccountId();
     }
 
     /**

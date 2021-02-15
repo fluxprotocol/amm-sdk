@@ -1,9 +1,11 @@
 import { Account } from "near-api-js";
 import TokenContract from "../contracts/TokenContract";
 import { SdkConfig } from "../models/SdkConfig";
+import { TokenMetadata } from "../models/TokenMetadata";
 
 export default class TokensHolder {
     tokens: Map<string, TokenContract> = new Map();
+    metadata: Map<string, TokenMetadata> = new Map();
     private account: Account;
     private sdkConfig: SdkConfig;
 
@@ -31,5 +33,17 @@ export default class TokensHolder {
         }
 
         return tokenContract;
+    }
+
+    async getTokenMetadata(collateralTokenId: string): Promise<TokenMetadata> {
+        const token = this.getTokenContract(collateralTokenId);
+        let metadata = this.metadata.get(collateralTokenId);
+
+        if (!metadata) {
+            metadata = await token.getMetadata();
+            this.metadata.set(collateralTokenId, metadata);
+        }
+
+        return metadata;
     }
 }

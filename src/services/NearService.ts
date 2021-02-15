@@ -16,7 +16,7 @@ export async function connectNear(connectConfig: ConnectConfig, sdkConfig: SdkCo
         return connectConfig.nearInstance;
     }
 
-    const networkConfig = createNetworkConfig(connectConfig);
+    const networkConfig = createNetworkConfig(connectConfig, sdkConfig);
 
     return connect({
         ...networkConfig,

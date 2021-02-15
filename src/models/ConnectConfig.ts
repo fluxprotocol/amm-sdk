@@ -7,7 +7,7 @@ export interface ConnectConfig {
     walletInstance?: WalletConnection;
     customNodeUrl?: string;
     customWalletUrl?: string;
-    network?: 'testnet' | 'mainnet' | 'custom';
+
 }
 
 export function createConnectConfig(connectConfig: Partial<ConnectConfig>): ConnectConfig {

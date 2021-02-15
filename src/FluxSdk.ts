@@ -18,6 +18,7 @@ import { AccountBalance as NearAccountBalance } from "near-api-js/lib/account";
 import { getPriceHistoryByMarketId, Period } from "./services/PriceHistoryService";
 import { PriceHistoryData } from "./models/PriceHistoryData";
 import { queryGraph } from "./services/GraphQLService";
+import { TokenMetadata } from "./models/TokenMetadata";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -168,6 +169,19 @@ export default class FluxSdk {
      */
     async getTokenBalance(collateralTokenId: string, accountId: string): Promise<string> {
         return this.account?.getTokenBalance(collateralTokenId, accountId) ?? '0';
+    }
+
+    /**
+     * Fetches token metadata
+     *
+     * @param {string} collateralTokenId
+     * @return {Promise<TokenMetadata>}
+     * @memberof FluxSdk
+     */
+    async getTokenMetadata(collateralTokenId: string): Promise<TokenMetadata> {
+        if (!this.tokens) throw new Error('Not connected');
+        const token = this.tokens.getTokenContract(collateralTokenId);
+        return token.getMetadata();
     }
 
     /**

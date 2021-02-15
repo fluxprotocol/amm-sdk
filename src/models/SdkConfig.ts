@@ -7,7 +7,7 @@ export interface SdkConfig {
     graphApiUrl: string;
     protocolContractId: string;
     nullContractId: string;
-    network: string;
+    network: 'testnet' | 'mainnet' | 'custom';
     keyStore: keyStores.BrowserLocalStorageKeyStore | keyStores.UnencryptedFileSystemKeyStore | keyStores.InMemoryKeyStore;
 }
 

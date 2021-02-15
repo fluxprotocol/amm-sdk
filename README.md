@@ -1,4 +1,4 @@
-# Flux AMM SDK
+# 🛠 Flux AMM SDK
 
 The official Flux AMM JavaScript SDK
 

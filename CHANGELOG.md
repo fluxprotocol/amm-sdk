@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.1.0...v1.2.0) (2021-02-17)
+
+
+### Features
+
+* **tokenContract:** Implement new NEP-141 standard ([4f28041](https://github.com/fluxprotocol/amm-sdk/commit/4f280411c68bdab7a6b1088594a7655294a8d818))
+
 ## 1.1.0 (2021-02-15)
 
 

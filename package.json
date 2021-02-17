@@ -9,7 +9,7 @@
         "coverage": "jest --coverage",
         "build": "tsc --build",
         "clean": "tsc --build --clean",
-        "release": "npm run build && standard-version"
+        "release": "npm run build && standard-version && npm publish"
     },
     "repository": {
         "type": "git",

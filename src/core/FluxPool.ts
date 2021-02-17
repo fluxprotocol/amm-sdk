@@ -35,7 +35,7 @@ export default class FluxPool {
             }
         });
 
-        return tokenContract.transferWithVault(amountIn, payload, storageRequired);
+        return tokenContract.transferCall(amountIn, payload, storageRequired);
     }
 
     async exitPool(marketId: string, totalIn: string) {

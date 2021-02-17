@@ -1,6 +1,6 @@
 const TokenContractMock = jest.fn(() => {
     return {
-        transferWithVault: jest.fn(() => {
+        transferCall: jest.fn(() => {
 
         }),
     };

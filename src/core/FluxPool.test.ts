@@ -36,7 +36,7 @@ describe('FluxPool', () => {
             });
 
             expect(fluxPool.tokensHolder.getTokenContract).toHaveBeenCalledWith('test.near');
-            expect(tokenContract.transferWithVault).toHaveBeenCalledWith('100000', expectedPayload, STORAGE_BASE);
+            expect(tokenContract.transferCall).toHaveBeenCalledWith('100000', expectedPayload, STORAGE_BASE);
         });
 
         it('should be able to seed the pool', async () => {
@@ -51,7 +51,7 @@ describe('FluxPool', () => {
             });
 
             expect(fluxPool.tokensHolder.getTokenContract).toHaveBeenCalledWith('test.near');
-            expect(tokenContract.transferWithVault).toHaveBeenCalledWith('100000', expectedPayload, new Big('160000000000000000000000'));
+            expect(tokenContract.transferCall).toHaveBeenCalledWith('100000', expectedPayload, new Big('160000000000000000000000'));
         });
 
         it('should not be able to seed when weight do not equal 100 together', async () => {

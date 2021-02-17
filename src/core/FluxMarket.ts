@@ -57,7 +57,7 @@ export default class FluxMarket {
             }
         });
 
-        return tokenContract.transferWithVault(params.amountIn, payload, STORAGE_BASE.mul(2));
+        return tokenContract.transferCall(params.amountIn, payload, STORAGE_BASE.mul(2));
     }
 
     async sell(sellParams: {

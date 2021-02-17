@@ -10,8 +10,8 @@ export default class TokenContract {
     constructor(account: Account, tokenAccountId: string, sdkConfig: SdkConfig) {
         this.sdkConfig = sdkConfig;
         this.contract = new Contract(account, tokenAccountId, {
-            viewMethods: ['get_balance', 'ft_metadata'],
-            changeMethods: ['transfer_with_vault'],
+            viewMethods: ['ft_balance_of', 'ft_metadata'],
+            changeMethods: ['ft_transfer_call'],
         });
     }
 
@@ -22,15 +22,15 @@ export default class TokenContract {
 
     async getBalance(accountId: string): Promise<string> {
         // @ts-ignore
-        return this.contract.get_balance({ account_id: accountId });
+        return this.contract.ft_balance_of({ account_id: accountId });
     }
 
-    async transferWithVault(amount: string, payload: string, storageCost = STORAGE_BASE): Promise<void> {
+    async transferCall(amount: string, msg: string, storageCost = STORAGE_BASE): Promise<void> {
         // @ts-ignore
-        return this.contract.transfer_with_vault({
+        return this.contract.ft_transfer_call({
             receiver_id: this.sdkConfig.protocolContractId,
             amount,
-            payload,
+            msg,
         }, MAX_GAS.toString(), storageCost.toString());
     }
 }

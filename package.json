@@ -1,6 +1,6 @@
 {
     "name": "@fluxprotocol/amm-sdk",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "Flux SDK that's using the Flux AMM Protocol",
     "main": "dist/FluxSdk.js",
     "types": "dist/FluxSdk.d.ts",
@@ -9,7 +9,7 @@
         "coverage": "jest --coverage",
         "build": "tsc --build",
         "clean": "tsc --build --clean",
-        "release": "standard-version"
+        "release": "npm run build && standard-version"
     },
     "repository": {
         "type": "git",

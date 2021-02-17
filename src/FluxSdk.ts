@@ -268,6 +268,20 @@ export default class FluxSdk {
     }
 
     /**
+     * Burns outcome tokens for the collateral token
+     * Requires the account to have a balance of each outcome
+     * and can only burn the lowest balance
+     *
+     * @param {string} marketId
+     * @param {string} toBurn
+     * @return {*}
+     * @memberof FluxSdk
+     */
+    async burnOutcomeTokensRedeemCollateral(marketId: string, toBurn: string) {
+        return this.market?.burnOutcomeTokensRedeemCollateral(marketId, toBurn);
+    }
+
+    /**
      * Allows you to claim your earnings after a market has ended
      *
      * @param {string} marketId

@@ -83,4 +83,8 @@ export default class FluxMarket {
     async claimEarnings(marketId: string) {
         return this.protocol.claimEarnings(marketId);
     }
+
+    async burnOutcomeTokensRedeemCollateral(marketId: string, toBurn: string) {
+        return this.protocol.burnOutcomeTokensRedeemCollateral(marketId, toBurn);
+    }
 }

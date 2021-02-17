@@ -9,8 +9,16 @@ export class ProtocolContract {
     constructor(account: Account, sdkConfig: SdkConfig) {
         this.contract = new Contract(account, sdkConfig.protocolContractId, {
             viewMethods: [],
-            changeMethods: ['create_market', 'seed_pool', 'sell', 'exit_pool', 'claim_earnings'],
+            changeMethods: ['create_market', 'seed_pool', 'sell', 'exit_pool', 'claim_earnings', 'burn_outcome_tokens_redeem_collateral'],
         });
+    }
+
+    async burnOutcomeTokensRedeemCollateral(marketId: string, toBurn: string) {
+        // @ts-ignore
+        return this.contract.burn_outcome_tokens_redeem_collateral({
+            market_id: marketId,
+            to_burn: toBurn,
+        }, MAX_GAS.toString(), STORAGE_BASE.toString());
     }
 
     async createMarket(

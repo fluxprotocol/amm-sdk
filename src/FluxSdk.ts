@@ -118,9 +118,8 @@ export default class FluxSdk {
      * @return {(string)}
      * @memberof FluxSdk
      */
-    getAccountId(): string {
-        if (!this.account) throw new Error('User is not signed in');
-        return this.account.getAccountId();
+    getAccountId(): string | undefined {
+        return this.account?.getAccountId();
     }
 
     /**

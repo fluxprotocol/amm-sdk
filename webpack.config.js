@@ -1,5 +1,4 @@
 const path = require('path');
-const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin');
 
 const exclude = '/node_modules';
 
@@ -16,16 +15,19 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, './dist/'),
-        libraryTarget: 'commonjs',
+        libraryTarget: 'umd',
         filename: '[name].js',
         publicPath: '/dist/',
     },
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
+                test: /\.(js|jsx|ts|tsx)$/,
+                exclude,
+                loader: 'babel-loader',
+                options: {
+                    sourceType: "unambiguous",
+                },
             },
         ],
     },

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.3.0...v1.4.0) (2021-02-19)
+
+
+### Features
+
+* **build:** Use webpack to pre-build the sdk ([6e4f21c](https://github.com/fluxprotocol/amm-sdk/commit/6e4f21c94a3fcef9c9b7ba0523c793d066d02368))
+
 ## [1.3.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.2.2...v1.3.0) (2021-02-17)
 
 

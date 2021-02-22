@@ -1,4 +1,5 @@
 import { AccountMarketBalanceGraphData } from "../models/AccountData";
+import { EscrowStatus } from "../models/EscrowStatus";
 import { MarketDetailGraphData, MarketGraphData } from "../models/Market";
 import { Pagination } from "../models/Pagination";
 import { SdkConfig } from "../models/SdkConfig";
@@ -101,4 +102,24 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
     });
 
     return response?.data?.market;
+}
+
+export async function getEscrowStatus(sdkConfig: SdkConfig, marketId: string, accountId: string): Promise<EscrowStatus[]> {
+    const response = await queryGraph(sdkConfig.graphApiUrl, {
+        operationName: 'EscrowStatus',
+        query: `
+            query EscrowStatus($marketId: String!, $accountId: String!) {
+                escrowStatus: getEscrowStatus(marketId: $marketId, accountId: $accountId) {
+                    type
+                    total_amount
+                }
+            }
+        `,
+        variables: {
+            id: marketId,
+            accountId,
+        }
+    });
+
+    return response.escrowStatus ?? [];
 }

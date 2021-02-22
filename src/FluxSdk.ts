@@ -9,7 +9,7 @@ import FluxPool from "./core/FluxPool";
 import TokensHolder from "./core/TokensHolder";
 import { FluxAccount } from "./core/FluxAccount";
 import FluxMarket from "./core/FluxMarket";
-import { getMarketById, getMarkets, MarketFilters } from "./services/MarketService";
+import { getEscrowStatus, getMarketById, getMarkets, MarketFilters } from "./services/MarketService";
 import { Pagination } from "./models/Pagination";
 import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
@@ -19,6 +19,7 @@ import { getPriceHistoryByMarketId, Period } from "./services/PriceHistoryServic
 import { PriceHistoryData } from "./models/PriceHistoryData";
 import { queryGraph } from "./services/GraphQLService";
 import { TokenMetadata } from "./models/TokenMetadata";
+import { EscrowStatus } from "./models/EscrowStatus";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -349,6 +350,18 @@ export default class FluxSdk {
      */
     async getPriceHistoryByMarketId(marketId: string, period: Period): Promise<PriceHistoryData[]> {
         return getPriceHistoryByMarketId(this.sdkConfig, marketId, period);
+    }
+
+    /**
+     * Gets the current escrow status of a specific user & market
+     *
+     * @param {string} marketId
+     * @param {string} accountId
+     * @return {Promise<EscrowStatus[]>}
+     * @memberof FluxSdk
+     */
+    async getEscrowStatus(marketId: string, accountId: string): Promise<EscrowStatus[]> {
+        return getEscrowStatus(this.sdkConfig, marketId, accountId);
     }
 
     /**

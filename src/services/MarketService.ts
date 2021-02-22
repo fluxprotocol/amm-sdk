@@ -121,5 +121,5 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, marketId: string, ac
         }
     });
 
-    return response.escrowStatus ?? [];
+    return response?.data?.escrowStatus ?? [];
 }

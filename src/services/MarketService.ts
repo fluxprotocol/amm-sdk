@@ -116,7 +116,7 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, marketId: string, ac
             }
         `,
         variables: {
-            id: marketId,
+            marketId,
             accountId,
         }
     });

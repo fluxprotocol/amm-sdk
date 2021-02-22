@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/fluxprotocol/amm-sdk/compare/v1.5.0...v1.5.1) (2021-02-22)
+
+
+### Bug Fixes
+
+* **escrowStatus:** Fix issue where wrong variable was used to query the graph ([462f00f](https://github.com/fluxprotocol/amm-sdk/commit/462f00fabeb2d75afdf6a171740118057206ae8f))
+
 ## [1.5.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.4.1...v1.5.0) (2021-02-22)
 
 

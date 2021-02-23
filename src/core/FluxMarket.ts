@@ -1,6 +1,7 @@
 import Big from "big.js";
 import { DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID, DEFAULT_SLIPPAGE, DEFAULT_SWAP_FEE, STORAGE_BASE } from "../config";
 import { ProtocolContract } from "../contracts/ProtocolContract";
+import { TokenWhitelist } from "../models/TokenWhitelist";
 import TokensHolder from "./TokensHolder";
 
 export default class FluxMarket {
@@ -86,5 +87,9 @@ export default class FluxMarket {
 
     async burnOutcomeTokensRedeemCollateral(marketId: string, toBurn: string) {
         return this.protocol.burnOutcomeTokensRedeemCollateral(marketId, toBurn);
+    }
+
+    async getTokenWhitelist(): Promise<TokenWhitelist[]> {
+        return this.protocol.getTokenWhitelist();
     }
 }

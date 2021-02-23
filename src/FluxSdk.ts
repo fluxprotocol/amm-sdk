@@ -20,6 +20,7 @@ import { PriceHistoryData } from "./models/PriceHistoryData";
 import { queryGraph } from "./services/GraphQLService";
 import { TokenMetadata } from "./models/TokenMetadata";
 import { EscrowStatus } from "./models/EscrowStatus";
+import { TokenWhitelist } from "./models/TokenWhitelist";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -362,6 +363,11 @@ export default class FluxSdk {
      */
     async getEscrowStatus(marketId: string, accountId: string): Promise<EscrowStatus[]> {
         return getEscrowStatus(this.sdkConfig, marketId, accountId);
+    }
+
+    async getTokenWhitelist(): Promise<TokenWhitelist[]> {
+        if (!this.market) throw new Error('Not connected');
+        return this.market.getTokenWhitelist();
     }
 
     /**

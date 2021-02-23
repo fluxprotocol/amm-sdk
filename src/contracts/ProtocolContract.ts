@@ -2,15 +2,25 @@ import Big from "big.js";
 import { Account, Contract } from "near-api-js";
 import { MAX_GAS, STORAGE_BASE } from "../config";
 import { SdkConfig } from "../models/SdkConfig";
+import { TokenWhitelist } from "../models/TokenWhitelist";
 
 export class ProtocolContract {
     contract: Contract;
 
     constructor(account: Account, sdkConfig: SdkConfig) {
         this.contract = new Contract(account, sdkConfig.protocolContractId, {
-            viewMethods: [],
+            viewMethods: ['get_token_whitelist'],
             changeMethods: ['create_market', 'seed_pool', 'sell', 'exit_pool', 'claim_earnings', 'burn_outcome_tokens_redeem_collateral'],
         });
+    }
+
+    async getTokenWhitelist(): Promise<TokenWhitelist[]> {
+        // @ts-ignore
+        const whitelist: [string, number][] = await this.contract.get_token_whitelist();
+        return whitelist.map((token) => ({
+            tokenId: token[0],
+            decimals: token[1],
+        }));
     }
 
     async burnOutcomeTokensRedeemCollateral(marketId: string, toBurn: string) {

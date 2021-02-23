@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.5.3...v1.6.0) (2021-02-23)
+
+
+### Features
+
+* **market:** Add support for getting the token whitelist ([c49f59c](https://github.com/fluxprotocol/amm-sdk/commit/c49f59c33487c66c39550a4e74eb48a8d8130a9d))
+
 ### [1.5.3](https://github.com/fluxprotocol/amm-sdk/compare/v1.5.2...v1.5.3) (2021-02-23)
 
 

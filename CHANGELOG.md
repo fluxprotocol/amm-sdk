@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.3](https://github.com/fluxprotocol/amm-sdk/compare/v1.5.2...v1.5.3) (2021-02-23)
+
+
+### Bug Fixes
+
+* **2fa:** Fix issue where 2FA was not possible due attaching max gas ([4ac234f](https://github.com/fluxprotocol/amm-sdk/commit/4ac234f812e675c99a908c381e4f17e31e83429e))
+
 ### [1.5.2](https://github.com/fluxprotocol/amm-sdk/compare/v1.5.1...v1.5.2) (2021-02-22)
 
 

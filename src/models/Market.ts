@@ -9,12 +9,11 @@ export interface MarketGraphData {
     categories: string[];
 
     pool: {
-        public: boolean;
         owner: string;
         collateral_token_id: string;
-        seed_nonce: string;
 
         pool_balances: {
+            weight: string;
             outcome_id: number;
             balance: string;
             price: number;
@@ -36,6 +35,7 @@ interface MarketDetailPoolGraphData extends MarketPoolGraphData {
 export interface MarketDetailGraphData extends MarketGraphData {
     payout_numerator: string[] | null;
     pool: MarketDetailPoolGraphData;
+    creation_date: string;
 
     claimed_earnings: {
         payout: string;

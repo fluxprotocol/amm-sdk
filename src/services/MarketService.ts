@@ -21,11 +21,10 @@ export async function getMarkets(sdkConfig: SdkConfig, filters: MarketFilters): 
                     market: getMarkets(filters: { expired: $expired, categories: $categories, limit: $limit, offset: $offset, finalized: $finalized }) {
                         items {
                             pool {
-                                public
                                 owner
                                 collateral_token_id
-                                seed_nonce
                                 pool_balances {
+                                    weight
                                     outcome_id
                                     balance
                                     price
@@ -64,11 +63,10 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
             query Market($id: String!, $accountId: String) {
                 market: getMarket(marketId: $id) {
                     pool {
-                        public
                         owner
-                        seed_nonce
                         collateral_token_id
                         pool_balances {
+                            weight
                             outcome_id
                             balance
                             price
@@ -77,7 +75,6 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
                         tokens_info {
                             is_pool_token
                             total_supply
-                            outcome_id
                         }
                     }
                     description
@@ -88,6 +85,7 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
                     id
                     volume
                     categories
+                    creation_date
                     payout_numerator
                     claimed_earnings(accountId: $accountId) {
                         payout

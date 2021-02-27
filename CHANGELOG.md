@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/fluxprotocol/amm-sdk/compare/v1.6.0...v1.6.1) (2021-02-27)
+
+
+### Bug Fixes
+
+* **markets:** Fix issue where fetching markets would result in a 400 due unavailable variables ([b2ed70b](https://github.com/fluxprotocol/amm-sdk/commit/b2ed70b6e187f93dc79278cacea54ffcf6ae7426))
+
 ## [1.6.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.5.3...v1.6.0) (2021-02-23)
 
 

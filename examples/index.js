@@ -9,7 +9,7 @@ async function main() {
         sdk.signIn();
     }
 
-    const r = await sdk.getPriceHistoryByMarketId('55', '1d');
+    const r = await sdk.getMarketById('1');
     console.log('[] r -> ', r);
 }
 

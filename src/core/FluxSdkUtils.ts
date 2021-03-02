@@ -4,3 +4,4 @@ export { default as calcSellAmountInCollateral } from '../utils/calcSellAmountIn
 export { default as sortBig } from '../utils/sortBig';
 export { default as calcMedian } from '../utils/calcMedian';
 export { default as calcScalarDistributionPercentages } from '../utils/calcScalarDistributionPercentages';
+export { default as calcDistributionHint } from '../utils/calcDistributionHint';

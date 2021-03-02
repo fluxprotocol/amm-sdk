@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.6.1...v1.7.0) (2021-03-02)
+
+
+### Features
+
+* **utils:** Add median calculation ([7643b26](https://github.com/fluxprotocol/amm-sdk/commit/7643b2636e49d22bcd1bb287c15de82f24c8f367))
+
 ### [1.6.1](https://github.com/fluxprotocol/amm-sdk/compare/v1.6.0...v1.6.1) (2021-02-27)
 
 

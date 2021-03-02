@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.10.0...v1.11.0) (2021-03-02)
+
+
+### Features
+
+* **utils:** Add calcScalarValue to utils ([45b8877](https://github.com/fluxprotocol/amm-sdk/commit/45b8877095514174a1c5e22637de5527ff7192ae))
+
 ## [1.10.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.9.0...v1.10.0) (2021-03-02)
 
 

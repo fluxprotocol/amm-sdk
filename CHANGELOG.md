@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.9.0...v1.10.0) (2021-03-02)
+
+
+### Features
+
+* **utils:** Add calcDistributionHint ([958c106](https://github.com/fluxprotocol/amm-sdk/commit/958c1063487517889fdfab0ada15a188ba15e907))
+
 ## [1.9.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.8.0...v1.9.0) (2021-03-02)
 
 

@@ -13,4 +13,10 @@ describe('calcMedian', () => {
 
         expect(result.toString()).toBe('50.6');
     });
+
+    it('should be able to find the median with negative values', () => {
+        const result = calcMedian([new Big(-50), new Big(51)]);
+
+        expect(result.toString()).toBe('0.5');
+    });
 });

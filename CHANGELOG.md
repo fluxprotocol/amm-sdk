@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.11.0...v1.12.0) (2021-03-03)
+
+
+### Features
+
+* **utils:** Add ability to calculate price by using pool balances ([0fb959e](https://github.com/fluxprotocol/amm-sdk/commit/0fb959e0847558a0ce86add6ca4bacdfbc5d4129))
+* **utils:** Add ability to calculate the new prices for selling/buying specific tokens ([ecaab12](https://github.com/fluxprotocol/amm-sdk/commit/ecaab1269fd0cbf80fd72de62ae45ba1abd247f2))
+
 ## [1.11.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.10.0...v1.11.0) (2021-03-02)
 
 

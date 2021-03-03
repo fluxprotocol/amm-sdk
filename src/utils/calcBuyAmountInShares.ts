@@ -1,17 +1,8 @@
 import Big from "big.js";
+import { ceilDiv, mulBN } from "./bigMath";
 
 const ONE = new Big(10 ** 18);
 const ZERO = new Big(0);
-
-const ceilDiv = (a: Big, b: Big): Big => {
-    return a.mod(b) === ZERO ? a.div(b) : a.div(b).add(1);
-};
-
-const mulBN = (a: Big, b: number, scale = 10000): Big => {
-    return new Big(a)
-        .mul(Math.round(b * scale))
-        .div(scale);
-};
 
 /**
  * Computes the amount of shares that will be bought with `investmentAmount` amount collateral.

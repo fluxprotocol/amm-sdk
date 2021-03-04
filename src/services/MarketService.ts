@@ -102,11 +102,11 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
     return response?.data?.market;
 }
 
-export async function getEscrowStatus(sdkConfig: SdkConfig, marketId: string, accountId: string): Promise<EscrowStatus[]> {
+export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, marketId?: string): Promise<EscrowStatus[]> {
     const response = await queryGraph(sdkConfig.graphApiUrl, {
         operationName: 'EscrowStatus',
         query: `
-            query EscrowStatus($marketId: String!, $accountId: String!) {
+            query EscrowStatus($marketId: String, $accountId: String!) {
                 escrowStatus: getEscrowStatus(marketId: $marketId, accountId: $accountId) {
                     type
                     total_amount

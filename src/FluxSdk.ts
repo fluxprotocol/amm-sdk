@@ -356,13 +356,13 @@ export default class FluxSdk {
     /**
      * Gets the current escrow status of a specific user & market
      *
-     * @param {string} marketId
      * @param {string} accountId
+     * @param {string | undefined} marketId
      * @return {Promise<EscrowStatus[]>}
      * @memberof FluxSdk
      */
-    async getEscrowStatus(marketId: string, accountId: string): Promise<EscrowStatus[]> {
-        return getEscrowStatus(this.sdkConfig, marketId, accountId);
+    async getEscrowStatus(accountId: string, marketId?: string): Promise<EscrowStatus[]> {
+        return getEscrowStatus(this.sdkConfig, accountId, marketId);
     }
 
     async getTokenWhitelist(): Promise<TokenWhitelist[]> {

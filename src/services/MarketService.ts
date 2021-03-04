@@ -110,6 +110,10 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, m
                 escrowStatus: getEscrowStatus(marketId: $marketId, accountId: $accountId) {
                     type
                     total_amount
+                    market {
+                        id
+                        description
+                    }
                 }
             }
         `,

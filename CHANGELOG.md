@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.13.0...v1.14.0) (2021-03-04)
+
+
+### Features
+
+* **escrow:** added market id and description to escrow status ([8d6113d](https://github.com/fluxprotocol/amm-sdk/commit/8d6113dc09a1c887eada7999e0844fe2a5ed6aca))
+
 ## [1.13.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.12.0...v1.13.0) (2021-03-04)
 
 

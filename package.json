@@ -1,6 +1,6 @@
 {
     "name": "@fluxprotocol/amm-sdk",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "Flux SDK that's using the Flux AMM Protocol",
     "main": "dist/FluxSdk.js",
     "types": "dist/FluxSdk.d.ts",

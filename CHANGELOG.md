@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.15.0...v1.16.0) (2021-03-04)
+
+
+### Features
+
+* **escrow:** adjusted EscrowStatus type to be up to date with current query result ([3106738](https://github.com/fluxprotocol/amm-sdk/commit/31067380ca6de26327bd9d35801ba313ad84c5b8))
+
 ## [1.15.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.14.0...v1.15.0) (2021-03-04)
 
 

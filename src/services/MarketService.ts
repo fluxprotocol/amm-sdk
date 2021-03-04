@@ -113,6 +113,9 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, m
                     market {
                         id
                         description
+                        pool {
+                            collateral_token_id
+                        }
                     }
                 }
             }

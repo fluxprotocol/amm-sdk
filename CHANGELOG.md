@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.14.0...v1.15.0) (2021-03-04)
+
+
+### Features
+
+* **escrow:** added pool > collateral_token_id to escrow status ([9c811d8](https://github.com/fluxprotocol/amm-sdk/commit/9c811d806abaa87f5e4837f18385adf1408149ad))
+
 ## [1.14.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.13.0...v1.14.0) (2021-03-04)
 
 

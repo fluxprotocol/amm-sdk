@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.12.0...v1.17.0) (2021-03-08)
+
+
+### Features
+
+* **escrow:** added market id and description to escrow status ([8d6113d](https://github.com/fluxprotocol/amm-sdk/commit/8d6113dc09a1c887eada7999e0844fe2a5ed6aca))
+* **escrow:** added pool > collateral_token_id to escrow status ([9c811d8](https://github.com/fluxprotocol/amm-sdk/commit/9c811d806abaa87f5e4837f18385adf1408149ad))
+* **escrow:** adjusted EscrowStatus type to be up to date with current query result ([3106738](https://github.com/fluxprotocol/amm-sdk/commit/31067380ca6de26327bd9d35801ba313ad84c5b8))
+* **escrow:** made marketId for escrowStatus optional and switched arugment index with accountId ([7da124a](https://github.com/fluxprotocol/amm-sdk/commit/7da124a3a8ed0e075d7da963ff87488b94edab70))
+
+
+### Bug Fixes
+
+* **calcBuyAmountInShares:** Fix issue where token denom was not dynamic ([100282d](https://github.com/fluxprotocol/amm-sdk/commit/100282d4d070ee3105de9ad1924f63b2739f6c4b))
+
 ## [1.16.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.15.0...v1.16.0) (2021-03-04)
 
 

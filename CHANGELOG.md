@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.17.0...v1.18.0) (2021-03-08)
+
+
+### Features
+
+* **createMarket:** Add support for scalar markets creation ([a4370a3](https://github.com/fluxprotocol/amm-sdk/commit/a4370a3916671b8f39a84e483baf936a36de3986))
+
 ## [1.17.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.12.0...v1.17.0) (2021-03-08)
 
 

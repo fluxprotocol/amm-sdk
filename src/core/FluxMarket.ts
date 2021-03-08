@@ -21,6 +21,7 @@ export default class FluxMarket {
         extraInfo: string,
         swapFee?: string,
         collateralTokenId?: string,
+        isScalar?: boolean,
     }) {
         if (!this.protocol) throw new Error('Cannot create a market without connecting first');
 
@@ -32,6 +33,7 @@ export default class FluxMarket {
             market.extraInfo,
             market.swapFee || DEFAULT_SWAP_FEE,
             market.collateralTokenId || DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID,
+            market.isScalar ?? false,
         );
     }
 

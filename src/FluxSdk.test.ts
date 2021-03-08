@@ -107,7 +107,8 @@ describe('FluxSdk', () => {
                 date,
                 'test_info',
                 '100000000',
-                'mytoken'
+                'mytoken',
+                false,
             );
         });
     });

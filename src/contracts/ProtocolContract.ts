@@ -39,6 +39,7 @@ export class ProtocolContract {
         extraInfo: string,
         swapFee: string,
         collateralTokenId: string,
+        isScalar: boolean,
     ) {
         const storageRequired = STORAGE_BASE.mul(outcomes.length);
 
@@ -52,6 +53,7 @@ export class ProtocolContract {
             collateral_token_id: collateralTokenId,
             categories,
             swap_fee: swapFee,
+            is_scalar: isScalar,
         }, MAX_GAS.toString(), storageRequired.toString());
     }
 

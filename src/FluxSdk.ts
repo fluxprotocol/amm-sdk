@@ -156,6 +156,7 @@ export default class FluxSdk {
         extraInfo: string,
         swapFee?: string,
         collateralTokenId?: string,
+        isScalar?: boolean,
     }) {
         return this.market?.createMarket(market);
     }

@@ -11,6 +11,7 @@ describe('calcBuyAmountInShares', () => {
                 new Big('100000000000000000000'),
             ],
             0.2,
+            18,
         );
 
         expect(result.toFixed(0)).toBe('68571428571428571428');
@@ -26,6 +27,7 @@ describe('calcBuyAmountInShares', () => {
                     new Big('100000000000000000000'),
                 ],
                 0.02,
+                18,
             );
         }
 

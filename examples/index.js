@@ -10,7 +10,6 @@ async function main() {
     }
 
     const r = await sdk.getMarketById('1');
-    console.log('[] r -> ', r);
 }
 
 main();

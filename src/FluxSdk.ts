@@ -21,6 +21,7 @@ import { queryGraph } from "./services/GraphQLService";
 import { TokenMetadata } from "./models/TokenMetadata";
 import { EscrowStatus } from "./models/EscrowStatus";
 import { TokenWhitelist } from "./models/TokenWhitelist";
+import { TransactionParams } from "./models/TransactionParams";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -207,8 +208,8 @@ export default class FluxSdk {
      * @param {number[]} weights the weights of the pool for each outcome. Together should equal 100(%)
      * @memberof FluxSdk
      */
-    async addLiquidity(collateralTokenId: string, marketId: string, amountIn: string, weights?: number[]) {
-        return this.pool?.addLiquidity(collateralTokenId, marketId, amountIn, weights);
+    async addLiquidity(collateralTokenId: string, marketId: string, amountIn: string, weights?: number[], txParams?: TransactionParams) {
+        return this.pool?.addLiquidity(collateralTokenId, marketId, amountIn, weights, txParams);
     }
 
     /**
@@ -243,8 +244,8 @@ export default class FluxSdk {
         amountOut: string,
         amountIn: string,
         slippage?: number,
-    }) {
-        return this.market?.buy(buyParams);
+    }, txParams?: TransactionParams) {
+        return this.market?.buy(buyParams, txParams);
     }
 
     /**

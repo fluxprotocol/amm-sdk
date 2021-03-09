@@ -1,6 +1,7 @@
 import Big from "big.js";
 import { STORAGE_BASE } from "../config";
 import { ProtocolContract } from "../contracts/ProtocolContract";
+import { TransactionParams } from "../models/TransactionParams";
 import calcDistributionHint from "../utils/calcDistributionHint";
 import TokensHolder from "./TokensHolder";
 
@@ -13,7 +14,7 @@ export default class FluxPool {
         this.tokensHolder = tokensHolder;
     }
 
-    async addLiquidity(collateralTokenId: string, marketId: string, amountIn: string, weights: number[] = []) {
+    async addLiquidity(collateralTokenId: string, marketId: string, amountIn: string, weights: number[] = [], txParams?: TransactionParams) {
         const tokenContract = this.tokensHolder.getTokenContract(collateralTokenId);
         let storageRequired = STORAGE_BASE;
         let weightIndication: string[] = [];
@@ -35,7 +36,10 @@ export default class FluxPool {
             }
         });
 
-        return tokenContract.transferCall(amountIn, payload, storageRequired);
+        return tokenContract.transferCall(amountIn, payload, {
+            value: storageRequired.toString(),
+            ...txParams,
+        });
     }
 
     async exitPool(marketId: string, totalIn: string) {

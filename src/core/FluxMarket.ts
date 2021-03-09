@@ -1,7 +1,8 @@
 import Big from "big.js";
-import { DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID, DEFAULT_SLIPPAGE, DEFAULT_SWAP_FEE, STORAGE_BASE } from "../config";
+import { DEFAULT_FUNGIBLE_TOKEN_CONTRACT_ID, DEFAULT_SLIPPAGE, DEFAULT_SWAP_FEE, MAX_GAS, STORAGE_BASE } from "../config";
 import { ProtocolContract } from "../contracts/ProtocolContract";
 import { TokenWhitelist } from "../models/TokenWhitelist";
+import { TransactionParams } from "../models/TransactionParams";
 import TokensHolder from "./TokensHolder";
 
 export default class FluxMarket {
@@ -44,7 +45,7 @@ export default class FluxMarket {
         amountOut: string,
         amountIn: string,
         slippage?: number,
-    }) {
+    }, txParams?: TransactionParams) {
         const params = {
             slippage: DEFAULT_SLIPPAGE,
             ...buyParams,
@@ -60,7 +61,12 @@ export default class FluxMarket {
             }
         });
 
-        return tokenContract.transferCall(params.amountIn, payload, STORAGE_BASE.mul(2));
+        const finalTxParams: TransactionParams = {
+            value: STORAGE_BASE.mul(2).toString(),
+            ...txParams,
+        };
+
+        return tokenContract.transferCall(params.amountIn, payload, finalTxParams);
     }
 
     async sell(sellParams: {

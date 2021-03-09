@@ -266,8 +266,8 @@ export default class FluxSdk {
         amountIn: string,
         outcomeId: number,
         slippage?: number,
-    }) {
-        return this.market?.sell(sellParams);
+    }, txParams?: TransactionParams) {
+        return this.market?.sell(sellParams, txParams);
     }
 
     /**

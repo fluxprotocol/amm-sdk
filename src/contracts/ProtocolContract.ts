@@ -3,6 +3,7 @@ import { Account, Contract } from "near-api-js";
 import { MAX_GAS, STORAGE_BASE } from "../config";
 import { SdkConfig } from "../models/SdkConfig";
 import { TokenWhitelist } from "../models/TokenWhitelist";
+import { TransactionParams } from "../models/TransactionParams";
 
 export class ProtocolContract {
     contract: Contract;
@@ -81,14 +82,20 @@ export class ProtocolContract {
         }, MAX_GAS.toString(), STORAGE_BASE.toString());
     }
 
-    async sell(marketId: string, outcomeId: number, amountOut: string, amountIn: string) {
+    async sell(marketId: string, outcomeId: number, amountOut: string, amountIn: string, txParams?: TransactionParams) {
+        const finalTxParams: TransactionParams = {
+            gas: MAX_GAS.toString(),
+            value: STORAGE_BASE.mul(2).toString(),
+            ...txParams,
+        };
+
         // @ts-ignore
         return this.contract.sell({
             market_id: marketId,
             collateral_out: amountOut,
             outcome_target: outcomeId,
             max_shares_in: amountIn,
-        }, MAX_GAS.toString(), STORAGE_BASE.mul(2).toString())
+        }, finalTxParams.gas, finalTxParams.value)
     }
 
     async claimEarnings(marketId: string) {

@@ -75,7 +75,7 @@ export default class FluxMarket {
         amountIn: string,
         outcomeId: number,
         slippage?: number,
-    }) {
+    }, txParams?: TransactionParams) {
         const params = {
             slippage: DEFAULT_SLIPPAGE,
             ...sellParams,
@@ -85,7 +85,8 @@ export default class FluxMarket {
             params.marketId,
             params.outcomeId,
             params.amountOut,
-            new Big(params.amountIn).mul(new Big(100).add(params.slippage)).div(100).toString()
+            new Big(params.amountIn).mul(new Big(100).add(params.slippage)).div(100).toString(),
+            txParams,
         );
     }
 

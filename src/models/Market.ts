@@ -7,6 +7,7 @@ export interface MarketGraphData {
     finalized: boolean;
     volume: string;
     categories: string[];
+    is_scalar: boolean;
 
     pool: {
         owner: string;

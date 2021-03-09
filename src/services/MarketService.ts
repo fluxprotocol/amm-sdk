@@ -38,6 +38,7 @@ export async function getMarkets(sdkConfig: SdkConfig, filters: MarketFilters): 
                             finalized
                             id
                             volume
+                            is_scalar
                             categories
                         }
                         total
@@ -87,6 +88,7 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
                     categories
                     creation_date
                     payout_numerator
+                    is_scalar
                     claimed_earnings(accountId: $accountId) {
                         payout
                     }

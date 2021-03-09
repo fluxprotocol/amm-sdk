@@ -40,6 +40,7 @@ export async function getMarkets(sdkConfig: SdkConfig, filters: MarketFilters): 
                             volume
                             is_scalar
                             categories
+                            creation_date
                         }
                         total
                     }

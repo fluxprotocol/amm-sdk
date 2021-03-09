@@ -8,6 +8,7 @@ export interface MarketGraphData {
     volume: string;
     categories: string[];
     is_scalar: boolean;
+    creation_date: string;
 
     pool: {
         owner: string;
@@ -36,7 +37,6 @@ interface MarketDetailPoolGraphData extends MarketPoolGraphData {
 export interface MarketDetailGraphData extends MarketGraphData {
     payout_numerator: string[] | null;
     pool: MarketDetailPoolGraphData;
-    creation_date: string;
 
     claimed_earnings: {
         payout: string;

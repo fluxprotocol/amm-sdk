@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.18.0...v1.19.0) (2021-03-10)
+
+
+### Features
+
+* **getAccountInfo:** Add spent to balances ([ac21e54](https://github.com/fluxprotocol/amm-sdk/commit/ac21e5484ee6d885be43f98e8e04807f465fca12))
+* **market:** Add 'is_scalar' as a property ([72fd35f](https://github.com/fluxprotocol/amm-sdk/commit/72fd35f6194d68de050f61b1776bd85bed5b2c62))
+* **market:** Add creation_date to markets ([6dfd46f](https://github.com/fluxprotocol/amm-sdk/commit/6dfd46f8c395673414ebabb118b26b5ffd075c49))
+* **sell:** Add support for setting transaction params ([0855ca8](https://github.com/fluxprotocol/amm-sdk/commit/0855ca8b7e90ad98d0567a00d9a690547659a895))
+* Add support for altering gas & value for a transaction ([420c549](https://github.com/fluxprotocol/amm-sdk/commit/420c549a07c1f2e748a83d22135114ae5c1f135f))
+
+
+### Bug Fixes
+
+* **calcScalarDistributionPercentages:** Fix issue where initial value did not match the actual value ([bac11fe](https://github.com/fluxprotocol/amm-sdk/commit/bac11fea37710d59216af8cb35dc24fc33126a3d))
+
 ## [1.18.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.17.0...v1.18.0) (2021-03-08)
 
 

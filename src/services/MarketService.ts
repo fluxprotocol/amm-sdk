@@ -180,7 +180,8 @@ export interface GetPoolTokenBalanceResponse {
     outcomeId: number;
     poolId: string;
     balance: string;
-    market?: {
+    market: {
+        is_scalar: boolean;
         description: string;
         pool: {
             collateral_token_id: string;
@@ -202,6 +203,7 @@ export async function getPoolTokenBalance(sdkConfig: SdkConfig, accountId: strin
 
                         market {
                             is_scalar
+                            description
 
                             pool {
                                 collateral_token_id

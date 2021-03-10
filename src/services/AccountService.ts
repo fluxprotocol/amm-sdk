@@ -12,6 +12,16 @@ export async function getAccountBalancesForMarket(sdkConfig: SdkConfig, marketId
                         balance
                         outcome_id
                         pool_id,
+                        spent
+
+                        market {
+                            outcome_tags
+                            is_scalar
+
+                            pool {
+                                collateral_token_id
+                            }
+                        }
                     }
                 }
             }
@@ -47,6 +57,7 @@ export async function getAccountInfo(sdkConfig: SdkConfig, accountId: string): P
                         balance
                         outcome_id
                         pool_id
+                        spent
                         market {
                             description
                             outcome_tags

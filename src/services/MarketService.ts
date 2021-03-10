@@ -131,3 +131,46 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, m
 
     return response?.data?.escrowStatus ?? [];
 }
+
+export interface MarketPoolBalancesResponse {
+    is_scalar: boolean;
+    outcome_tags: string[];
+    pool: {
+        pool_balances: {
+            weight: string;
+            odds: string;
+            outcome_id: number;
+            price: number;
+            balance: string;
+        }[];
+    }
+}
+
+export async function getMarketPoolBalances(sdkConfig: SdkConfig, marketId: string): Promise<MarketPoolBalancesResponse> {
+    const response = await queryGraph(sdkConfig.graphApiUrl, {
+        query: `
+            query MarketOutcomeTokens($id: String!) {
+                market: getMarket(marketId: $id) {
+                    pool {
+                        pool_balances {
+                            weight
+                            outcome_id
+                            balance
+                            price
+                            odds
+                        }
+                    }
+                    outcome_tags
+                    is_scalar
+                }
+            }
+
+        `,
+        operationName: 'MarketOutcomeTokens',
+        variables: {
+            id: marketId,
+        }
+    });
+
+    return response.data?.market;
+}

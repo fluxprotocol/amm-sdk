@@ -7,6 +7,10 @@ export interface AccountMarketBalanceGraphData {
     market: {
         outcome_tags: string[];
         is_scalar: boolean;
+        description: string;
+        finalized: boolean;
+        end_time: string;
+        payout_numerator: string[] | null;
         pool: {
             collateral_token_id: string;
         }
@@ -24,6 +28,17 @@ export interface AccountBalance {
         end_time: string;
         finalized: boolean;
         payout_numerator: string[] | null;
+        is_scalar: boolean;
+        pool: {
+            collateral_token_id: string;
+            pool_balances: {
+                weight: string;
+                outcome_id: number;
+                balance: string;
+                price: number;
+                odds: string;
+            }[];
+        }
     }
 }
 
@@ -33,6 +48,10 @@ export interface AccountFeeBalance {
     outcomeId: number;
     poolId: string;
     market: {
-        description: string
+        description: string;
+        is_scalar: boolean;
+        pool: {
+            collateral_token_id: string;
+        };
     }
 }

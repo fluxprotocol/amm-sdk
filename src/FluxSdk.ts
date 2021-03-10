@@ -9,13 +9,13 @@ import FluxPool from "./core/FluxPool";
 import TokensHolder from "./core/TokensHolder";
 import { FluxAccount } from "./core/FluxAccount";
 import FluxMarket from "./core/FluxMarket";
-import { getEscrowStatus, getMarketById, getMarkets, MarketFilters } from "./services/MarketService";
+import { getEscrowStatus, getMarketById, getMarketPoolBalances, getMarkets, MarketFilters } from "./services/MarketService";
 import { Pagination } from "./models/Pagination";
 import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
-import { getAccountBalancesForMarket, getAccountInfo } from "./services/AccountService";
+import { getAccountBalancesForMarket, getAccountInfo, GetAccountInfoOptions } from "./services/AccountService";
 import { AccountBalance as NearAccountBalance } from "near-api-js/lib/account";
-import { getPriceHistoryByMarketId, Period } from "./services/PriceHistoryService";
+import { DateMetric, getPriceHistoryByMarketId, PriceHistoryOptions } from "./services/PriceHistoryService";
 import { PriceHistoryData } from "./models/PriceHistoryData";
 import { queryGraph } from "./services/GraphQLService";
 import { TokenMetadata } from "./models/TokenMetadata";
@@ -319,6 +319,17 @@ export default class FluxSdk {
     }
 
     /**
+     * Gets the current market pool balances
+     *
+     * @param {string} marketId
+     * @return {*}
+     * @memberof FluxSdk
+     */
+    async getMarketPoolBalances(marketId: string) {
+        return getMarketPoolBalances(this.sdkConfig, marketId);
+    }
+
+    /**
      * Fetches the balances of a market for a specific account
      *
      * @param {string} marketId
@@ -336,23 +347,23 @@ export default class FluxSdk {
      * @param {string} accountId
      * @memberof FluxSdk
      */
-    async getAccountInfo(accountId: string): Promise<{
+    async getAccountInfo(accountId: string, options?: GetAccountInfoOptions): Promise<{
         balances: AccountBalance[],
         earned_fees: AccountFeeBalance[];
     }> {
-        return getAccountInfo(this.sdkConfig, accountId);
+        return getAccountInfo(this.sdkConfig, accountId, options);
     }
 
     /**
-     * Gets the price history for a spec
+     * Gets the price history for a period
      *
      * @param {string} marketId
-     * @param {Period} period
-     * @return {*}  {Promise<PriceHistoryData>}
+     * @param {PriceHistoryOptions} options
+     * @return {Promise<PriceHistoryData[]>}
      * @memberof FluxSdk
      */
-    async getPriceHistoryByMarketId(marketId: string, period: Period): Promise<PriceHistoryData[]> {
-        return getPriceHistoryByMarketId(this.sdkConfig, marketId, period);
+    async getPriceHistoryByMarketId(marketId: string, options: PriceHistoryOptions): Promise<PriceHistoryData[]> {
+        return getPriceHistoryByMarketId(this.sdkConfig, marketId, options);
     }
 
     /**
@@ -396,3 +407,6 @@ export default class FluxSdk {
        queryGraph(this.sdkConfig.graphApiUrl, params);
     }
 }
+
+// Some models for exporting
+export { DateMetric };

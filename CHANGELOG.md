@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.1](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.0...v1.20.1) (2021-03-10)
+
+
+### Bug Fixes
+
+* PoolTokenBalance fix issue with missing data and types ([e91ffce](https://github.com/fluxprotocol/amm-sdk/commit/e91ffcee59ddec870e182c61b23c3409e342ba1b))
+
 ## [1.20.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.19.0...v1.20.0) (2021-03-10)
 
 

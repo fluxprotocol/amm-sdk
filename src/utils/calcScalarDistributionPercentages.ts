@@ -1,5 +1,4 @@
 import Big from "big.js";
-import calcDistributionHint from "./calcDistributionHint";
 
 /**
  * Calculates the distribution percentages hint for scalar markets
@@ -20,7 +19,7 @@ export default function calcScalarDistributionPercentages(pointerValue: Big, low
     const percUpperBound = diffUpperBound.div(range).mul(100);
 
     return [
-        percLowerBound.toNumber(),
         percUpperBound.toNumber(),
+        percLowerBound.toNumber(),
     ];
 }

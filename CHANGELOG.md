@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.19.0...v1.20.0) (2021-03-10)
+
+
+### Features
+
+* Add better support for accounts & price history ([fc5a72a](https://github.com/fluxprotocol/amm-sdk/commit/fc5a72a97b647daedd0013c768964a06dc71e92d))
+* Add getPoolTokenBalance() ([b2ffb4f](https://github.com/fluxprotocol/amm-sdk/commit/b2ffb4fb9f8a20fdd45146b7f4d9d9be8f888fa2))
+
 ## [1.19.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.18.0...v1.19.0) (2021-03-10)
 
 

@@ -174,3 +174,54 @@ export async function getMarketPoolBalances(sdkConfig: SdkConfig, marketId: stri
 
     return response.data?.market;
 }
+
+export interface GetPoolTokenBalanceResponse {
+    fees: string;
+    outcomeId: number;
+    poolId: string;
+    balance: string;
+    market?: {
+        description: string;
+        pool: {
+            collateral_token_id: string;
+        }
+    }
+}
+
+export async function getPoolTokenBalance(sdkConfig: SdkConfig, accountId: string, marketId: string): Promise<GetPoolTokenBalanceResponse | null> {
+    const response = await queryGraph(sdkConfig.graphApiUrl, {
+        operationName: 'AccountMarketPoolBalances',
+        query: `
+            query AccountMarketPoolBalances($accountId: String!, $marketId: String) {
+                account: getAccount(accountId: $accountId) {
+                    earned_fees(poolId: $marketId) {
+                        balance
+                        fees
+                        outcomeId
+                        poolId
+
+                        market {
+                            is_scalar
+
+                            pool {
+                                collateral_token_id
+                            }
+                        }
+                    }
+                }
+            }
+        `,
+        variables: {
+            accountId,
+            marketId,
+        }
+    });
+
+    const data = response.data.account.earned_fees;
+
+    if (!data.length) {
+        return null;
+    }
+
+    return data[0];
+}

@@ -9,7 +9,7 @@ import FluxPool from "./core/FluxPool";
 import TokensHolder from "./core/TokensHolder";
 import { FluxAccount } from "./core/FluxAccount";
 import FluxMarket from "./core/FluxMarket";
-import { getEscrowStatus, getMarketById, getMarketPoolBalances, getMarkets, MarketFilters } from "./services/MarketService";
+import { getEscrowStatus, getMarketById, getMarketPoolBalances, getMarkets, getPoolTokenBalance, GetPoolTokenBalanceResponse, MarketFilters } from "./services/MarketService";
 import { Pagination } from "./models/Pagination";
 import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
@@ -378,9 +378,27 @@ export default class FluxSdk {
         return getEscrowStatus(this.sdkConfig, accountId, marketId);
     }
 
+    /**
+     * Gets all the tokens that are whitelisted by the protocol
+     *
+     * @return {Promise<TokenWhitelist[]>}
+     * @memberof FluxSdk
+     */
     async getTokenWhitelist(): Promise<TokenWhitelist[]> {
         if (!this.market) throw new Error('Not connected');
         return this.market.getTokenWhitelist();
+    }
+
+    /**
+     * Gets the balances and earned fees of a account
+     *
+     * @param {string} accountId
+     * @param {string} marketId
+     * @return {Promise<GetPoolTokenBalanceResponse | null>}
+     * @memberof FluxSdk
+     */
+    async getPoolTokenBalance(accountId: string, marketId: string): Promise<GetPoolTokenBalanceResponse | null> {
+        return getPoolTokenBalance(this.sdkConfig, accountId, marketId);
     }
 
     /**

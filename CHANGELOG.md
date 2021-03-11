@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.2](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.1...v1.20.2) (2021-03-11)
+
+
+### Bug Fixes
+
+* Fix issue where slippage calculation could cause rounding errors ([8a532a6](https://github.com/fluxprotocol/amm-sdk/commit/8a532a6422bb4222366bf062cf17989e65c837d8))
+
 ### [1.20.1](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.0...v1.20.1) (2021-03-10)
 
 

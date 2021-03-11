@@ -1,4 +1,3 @@
-import { AccountMarketBalanceGraphData } from "../models/AccountData";
 import { EscrowStatus } from "../models/EscrowStatus";
 import { MarketDetailGraphData, MarketGraphData } from "../models/Market";
 import { Pagination } from "../models/Pagination";

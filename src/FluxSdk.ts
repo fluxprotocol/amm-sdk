@@ -22,6 +22,8 @@ import { TokenMetadata } from "./models/TokenMetadata";
 import { EscrowStatus } from "./models/EscrowStatus";
 import { TokenWhitelist } from "./models/TokenWhitelist";
 import { TransactionParams } from "./models/TransactionParams";
+import { getTransactions, GetTransactionsParams } from "./services/TransactionService";
+import { FluxTransaction } from "./models/FluxTransaction";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -399,6 +401,17 @@ export default class FluxSdk {
      */
     async getPoolTokenBalance(accountId: string, marketId: string): Promise<GetPoolTokenBalanceResponse | null> {
         return getPoolTokenBalance(this.sdkConfig, accountId, marketId);
+    }
+
+    /**
+     * Gets all the Flux transactions
+     *
+     * @param {GetTransactionsParams} params
+     * @return {Promise<Pagination<FluxTransaction>>}
+     * @memberof FluxSdk
+     */
+    async getTransactions(params: GetTransactionsParams): Promise<Pagination<FluxTransaction>>  {
+        return getTransactions(this.sdkConfig, params);
     }
 
     /**

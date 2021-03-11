@@ -10,6 +10,6 @@ import Big from "big.js";
  * @param {Big} priceLong
  * @return {Big} The underlying guess of the market
  */
-export default function calcScalarValue(lowerBound: Big, upperBound: Big, priceLong: Big) {
+export default function calcScalarValue(lowerBound: Big, upperBound: Big, priceLong: Big): Big {
     return priceLong.mul(upperBound.sub(lowerBound)).add(lowerBound);
 }

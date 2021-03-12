@@ -102,6 +102,6 @@ export class ProtocolContract {
         // @ts-ignore
         this.contract.claim_earnings({
             market_id: marketId,
-        }, MAX_GAS, STORAGE_BASE)
+        }, MAX_GAS.toString(), STORAGE_BASE.toString())
     }
 }

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.2...v1.21.0) (2021-03-12)
+
+
+### Features
+
+* Add getTransactions API ([0b1a595](https://github.com/fluxprotocol/amm-sdk/commit/0b1a595a63d29a1bc202d18277445b4283979e52))
+
+
+### Bug Fixes
+
+* **swap:** Fix issue where rounding could cause errors ([f384568](https://github.com/fluxprotocol/amm-sdk/commit/f38456840127da10d6a1040cd6f397fb23dc48b1))
+
 ### [1.20.2](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.1...v1.20.2) (2021-03-11)
 
 

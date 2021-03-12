@@ -51,7 +51,7 @@ export default class FluxMarket {
             ...buyParams,
         };
 
-        const minSharesOut = new Big(params.amountOut).mul(new Big(100).sub(params.slippage)).div(100).round(0).toString();
+        const minSharesOut = new Big(params.amountOut).mul(new Big(100).sub(params.slippage)).div(100).round(0, 0).toString();
         const tokenContract = this.tokens.getTokenContract(params.collateralTokenId);
 
         const payload = JSON.stringify({
@@ -83,7 +83,7 @@ export default class FluxMarket {
             ...sellParams,
         };
 
-        const slippageIn = new Big(params.amountIn).mul(new Big(100).add(params.slippage)).div(100).round(0).toString();
+        const slippageIn = new Big(params.amountIn).mul(new Big(100).add(params.slippage)).div(100).round(0, 0).toString();
 
         return this.protocol.sell(
             params.marketId,

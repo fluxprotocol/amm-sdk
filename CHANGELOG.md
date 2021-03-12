@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.16.0...v1.21.0) (2021-03-12)
+
+
+### Features
+
+* Add better support for accounts & price history ([fc5a72a](https://github.com/fluxprotocol/amm-sdk/commit/fc5a72a97b647daedd0013c768964a06dc71e92d))
+* Add getPoolTokenBalance() ([b2ffb4f](https://github.com/fluxprotocol/amm-sdk/commit/b2ffb4fb9f8a20fdd45146b7f4d9d9be8f888fa2))
+* **createMarket:** Add support for scalar markets creation ([a4370a3](https://github.com/fluxprotocol/amm-sdk/commit/a4370a3916671b8f39a84e483baf936a36de3986))
+* **getAccountInfo:** Add spent to balances ([ac21e54](https://github.com/fluxprotocol/amm-sdk/commit/ac21e5484ee6d885be43f98e8e04807f465fca12))
+* **market:** Add 'is_scalar' as a property ([72fd35f](https://github.com/fluxprotocol/amm-sdk/commit/72fd35f6194d68de050f61b1776bd85bed5b2c62))
+* **market:** Add creation_date to markets ([6dfd46f](https://github.com/fluxprotocol/amm-sdk/commit/6dfd46f8c395673414ebabb118b26b5ffd075c49))
+* **sell:** Add support for setting transaction params ([0855ca8](https://github.com/fluxprotocol/amm-sdk/commit/0855ca8b7e90ad98d0567a00d9a690547659a895))
+* Add support for altering gas & value for a transaction ([420c549](https://github.com/fluxprotocol/amm-sdk/commit/420c549a07c1f2e748a83d22135114ae5c1f135f))
+
+
+### Bug Fixes
+
+* **claimEarnings:** Cast MAX_GAS and STORAGE_BASE to string in claimEarnings ([a535bdd](https://github.com/fluxprotocol/amm-sdk/commit/a535bdd90fffd9ad2fd649a39b23af1167cdd94b))
+* Fix issue where slippage calculation could cause rounding errors ([8a532a6](https://github.com/fluxprotocol/amm-sdk/commit/8a532a6422bb4222366bf062cf17989e65c837d8))
+* PoolTokenBalance fix issue with missing data and types ([e91ffce](https://github.com/fluxprotocol/amm-sdk/commit/e91ffcee59ddec870e182c61b23c3409e342ba1b))
+* **calcBuyAmountInShares:** Fix issue where token denom was not dynamic ([100282d](https://github.com/fluxprotocol/amm-sdk/commit/100282d4d070ee3105de9ad1924f63b2739f6c4b))
+* **calcScalarDistributionPercentages:** Fix issue where initial value did not match the actual value ([bac11fe](https://github.com/fluxprotocol/amm-sdk/commit/bac11fea37710d59216af8cb35dc24fc33126a3d))
+
 ### [1.20.2](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.1...v1.20.2) (2021-03-11)
 
 

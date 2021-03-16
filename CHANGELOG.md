@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.22.0...v1.23.0) (2021-03-16)
+
+
+### Features
+
+* **getTransactions:** Return more market data ([c876b2e](https://github.com/fluxprotocol/amm-sdk/commit/c876b2e0ed4a7f17ee6a043754680ba6f540f0a4))
+
 ## [1.22.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.20.2...v1.22.0) (2021-03-15)
 
 

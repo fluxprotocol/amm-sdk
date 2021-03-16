@@ -23,7 +23,7 @@ import { EscrowStatus } from "./models/EscrowStatus";
 import { TokenWhitelist } from "./models/TokenWhitelist";
 import { TransactionParams } from "./models/TransactionParams";
 import { getTransactions, GetTransactionsParams } from "./services/TransactionService";
-import { FluxTransaction } from "./models/FluxTransaction";
+import { FluxTransaction, FluxTransactionType } from "./models/FluxTransaction";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -440,4 +440,5 @@ export default class FluxSdk {
 }
 
 // Some models for exporting
-export { DateMetric };
+export { DateMetric, FluxTransactionType };
+export type { FluxTransaction };

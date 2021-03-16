@@ -15,4 +15,12 @@ export interface FluxTransaction {
     outcome_id: string;
     date: string;
     type: FluxTransactionType;
+    pool: {
+        collateral_token_id: string;
+    }
+    market: {
+        description: string;
+        outcome_tags: string[];
+        is_scalar: boolean;
+    }
 }

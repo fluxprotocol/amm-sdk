@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.23.0...v1.24.0) (2021-03-16)
+
+
+### Features
+
+* **escrow:** Add support for getting only the active escrows ([da6d1ec](https://github.com/fluxprotocol/amm-sdk/commit/da6d1ec6e7c9cff3a45974e6fad6fc6b890c0b12))
+
 ## [1.23.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.22.0...v1.23.0) (2021-03-16)
 
 

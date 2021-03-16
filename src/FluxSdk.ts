@@ -9,7 +9,7 @@ import FluxPool from "./core/FluxPool";
 import TokensHolder from "./core/TokensHolder";
 import { FluxAccount } from "./core/FluxAccount";
 import FluxMarket from "./core/FluxMarket";
-import { getEscrowStatus, getMarketById, getMarketPoolBalances, getMarkets, getPoolTokenBalance, GetPoolTokenBalanceResponse, MarketFilters } from "./services/MarketService";
+import { getEscrowStatus, GetEscrowStatusOptions, getMarketById, getMarketPoolBalances, getMarkets, getPoolTokenBalance, GetPoolTokenBalanceResponse, MarketFilters } from "./services/MarketService";
 import { Pagination } from "./models/Pagination";
 import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
@@ -372,12 +372,13 @@ export default class FluxSdk {
      * Gets the current escrow status of a specific user & market
      *
      * @param {string} accountId
-     * @param {string | undefined} marketId
+     * @param {string} [marketId]
+     * @param {GetEscrowStatusOptions} [options={}]
      * @return {Promise<EscrowStatus[]>}
      * @memberof FluxSdk
      */
-    async getEscrowStatus(accountId: string, marketId?: string): Promise<EscrowStatus[]> {
-        return getEscrowStatus(this.sdkConfig, accountId, marketId);
+    async getEscrowStatus(accountId: string, marketId?: string, options: GetEscrowStatusOptions = {}): Promise<EscrowStatus[]> {
+        return getEscrowStatus(this.sdkConfig, accountId, marketId, options);
     }
 
     /**

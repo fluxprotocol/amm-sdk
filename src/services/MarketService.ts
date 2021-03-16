@@ -104,12 +104,16 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
     return response?.data?.market;
 }
 
-export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, marketId?: string): Promise<EscrowStatus[]> {
+export interface GetEscrowStatusOptions {
+    onlyActive?: boolean;
+}
+
+export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, marketId?: string, options: GetEscrowStatusOptions = {}): Promise<EscrowStatus[]> {
     const response = await queryGraph(sdkConfig.graphApiUrl, {
         operationName: 'EscrowStatus',
         query: `
-            query EscrowStatus($marketId: String, $accountId: String!) {
-                escrowStatus: getEscrowStatus(marketId: $marketId, accountId: $accountId) {
+            query EscrowStatus($marketId: String, $accountId: String!, $onlyActive: Boolean) {
+                escrowStatus: getEscrowStatus(marketId: $marketId, accountId: $accountId, onlyActive: $onlyActive) {
                     type
                     total_amount
                     market {
@@ -125,6 +129,7 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, m
         variables: {
             marketId,
             accountId,
+            onlyActive: options.onlyActive ?? false,
         }
     });
 

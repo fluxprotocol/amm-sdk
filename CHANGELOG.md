@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.24.0...v1.25.0) (2021-03-22)
+
+
+### Features
+
+* Add support for fetching participated markets ([d4482c1](https://github.com/fluxprotocol/amm-sdk/commit/d4482c10446092f597a58ec7abf3a11a0ea6db95))
+
 ## [1.24.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.23.0...v1.24.0) (2021-03-16)
 
 

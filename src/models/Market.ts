@@ -9,6 +9,7 @@ export interface MarketGraphData {
     categories: string[];
     is_scalar: boolean;
     creation_date: string;
+    payout_numerator: string[] | null;
 
     pool: {
         owner: string;

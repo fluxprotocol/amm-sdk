@@ -1,4 +1,6 @@
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "../models/AccountData";
+import { Pagination } from "../models/Pagination";
+import { ParticipatedMarket } from "../models/ParticipatedMarket";
 import { SdkConfig } from "../models/SdkConfig";
 import { queryGraph } from "./GraphQLService";
 
@@ -109,4 +111,46 @@ export async function getAccountInfo(sdkConfig: SdkConfig, accountId: string, op
     });
 
     return response?.data?.account;
+}
+
+export interface GetParticipatedMarketsOptions {
+    limit?: number;
+    offset?: number;
+}
+
+export async function getParticipatedMarkets(sdkConfig: SdkConfig, accountId: string, options?: GetParticipatedMarketsOptions): Promise<Pagination<ParticipatedMarket>> {
+    const response = await queryGraph(sdkConfig.graphApiUrl, {
+        operationName: 'ParticipatedMarkets',
+        query: `
+            query ParticipatedMarkets($accountId: String!, $limit: Int, $offset: Int) {
+                account: getAccount(accountId: $accountId) {
+                    participated_markets(limit: $limit, offset: $offset) {
+                        total
+                        items {
+                            participated_date
+                            market {
+                                id
+                                description
+                                extra_info
+                                outcome_tags
+                                end_time
+                                payout_numerator
+                                finalized
+                                categories
+                                creation_date
+                                is_scalar
+                            }
+                        }
+                    }
+                }
+            }
+        `,
+        variables: {
+            accountId,
+            limit: options?.limit,
+            offset: options?.offset,
+        }
+    });
+
+    return response?.data?.account?.participated_markets;
 }

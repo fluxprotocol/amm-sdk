@@ -13,7 +13,7 @@ import { getEscrowStatus, GetEscrowStatusOptions, getMarketById, getMarketPoolBa
 import { Pagination } from "./models/Pagination";
 import { MarketDetailGraphData, MarketGraphData } from "./models/Market";
 import { AccountBalance, AccountFeeBalance, AccountMarketBalanceGraphData } from "./models/AccountData";
-import { getAccountBalancesForMarket, getAccountInfo, GetAccountInfoOptions } from "./services/AccountService";
+import { getAccountBalancesForMarket, getAccountInfo, GetAccountInfoOptions, getParticipatedMarkets, GetParticipatedMarketsOptions } from "./services/AccountService";
 import { AccountBalance as NearAccountBalance } from "near-api-js/lib/account";
 import { DateMetric, getPriceHistoryByMarketId, PriceHistoryOptions } from "./services/PriceHistoryService";
 import { PriceHistoryData } from "./models/PriceHistoryData";
@@ -24,6 +24,7 @@ import { TokenWhitelist } from "./models/TokenWhitelist";
 import { TransactionParams } from "./models/TransactionParams";
 import { getTransactions, GetTransactionsParams } from "./services/TransactionService";
 import { FluxTransaction, FluxTransactionType } from "./models/FluxTransaction";
+import { ParticipatedMarket } from "./models/ParticipatedMarket";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -415,6 +416,10 @@ export default class FluxSdk {
         return getTransactions(this.sdkConfig, params);
     }
 
+    async getParticipatedMarkets(accountId: string, options?: GetParticipatedMarketsOptions): Promise<Pagination<ParticipatedMarket>> {
+        return getParticipatedMarkets(this.sdkConfig, accountId, options);
+    }
+
     /**
      * Querys the GraphQL server
      * Usefull when the default given querys are not enough and you want to fine tune your data
@@ -442,4 +447,4 @@ export default class FluxSdk {
 
 // Some models for exporting
 export { DateMetric, FluxTransactionType };
-export type { FluxTransaction };
+export type { FluxTransaction, ParticipatedMarket };

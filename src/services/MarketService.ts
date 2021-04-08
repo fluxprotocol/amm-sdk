@@ -37,6 +37,7 @@ export async function getMarkets(sdkConfig: SdkConfig, filters: MarketFilters): 
                             finalized
                             id
                             volume
+                            liquidity
                             is_scalar
                             categories
                             creation_date
@@ -85,6 +86,7 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
                     finalized
                     id
                     volume
+                    liquidity
                     categories
                     creation_date
                     payout_numerator

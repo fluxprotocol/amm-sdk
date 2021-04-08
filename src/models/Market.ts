@@ -6,6 +6,7 @@ export interface MarketGraphData {
     extra_info: string;
     finalized: boolean;
     volume: string;
+    liquidity: string | null;
     categories: string[];
     is_scalar: boolean;
     creation_date: string;

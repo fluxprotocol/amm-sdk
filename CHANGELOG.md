@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.26.0...v1.27.0) (2021-04-19)
+
+
+### Features
+
+* Made claiming storage deposit 1 yocto near ([7cc927c](https://github.com/fluxprotocol/amm-sdk/commit/7cc927c5e038b231395939ca34dfeebe2f50f757))
+
 ## [1.26.0](https://github.com/fluxprotocol/amm-sdk/compare/v1.25.1...v1.26.0) (2021-04-08)
 
 

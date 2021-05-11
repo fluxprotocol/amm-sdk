@@ -157,6 +157,7 @@ export default class FluxSdk {
         outcomes: string[],
         categories?: string[],
         endDate: Date,
+        resolutionDate?: Date,
         extraInfo: string,
         swapFee?: string,
         collateralTokenId?: string,

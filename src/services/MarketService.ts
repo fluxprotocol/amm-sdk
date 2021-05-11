@@ -33,6 +33,7 @@ export async function getMarkets(sdkConfig: SdkConfig, filters: MarketFilters): 
                             description
                             outcome_tags
                             end_time
+                            resolution_time
                             extra_info
                             finalized
                             id
@@ -82,6 +83,7 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
                     description
                     outcome_tags
                     end_time
+                    resolution_time
                     extra_info
                     finalized
                     id

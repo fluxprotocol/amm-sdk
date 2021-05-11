@@ -3,6 +3,7 @@ export interface MarketGraphData {
     description: string;
     outcome_tags: string[];
     end_time: string;
+    resolution_time: string;
     extra_info: string;
     finalized: boolean;
     volume: string;

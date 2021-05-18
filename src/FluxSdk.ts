@@ -25,6 +25,8 @@ import { TransactionParams } from "./models/TransactionParams";
 import { getTransactions, GetTransactionsParams } from "./services/TransactionService";
 import { FluxTransaction, FluxTransactionType } from "./models/FluxTransaction";
 import { ParticipatedMarket } from "./models/ParticipatedMarket";
+import { getOracleConfig } from "./services/OracleService";
+import { OracleConfig } from "./models/OracleConfig";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -77,7 +79,7 @@ export default class FluxSdk {
 
         this.tokens = new TokensHolder(nearAccount, this.sdkConfig);
         this.account = new FluxAccount(this.tokens, this.walletConnection, this.sdkConfig);
-        this.protocol = new ProtocolContract(nearAccount, this.sdkConfig);
+        this.protocol = new ProtocolContract(nearAccount, this.sdkConfig, this.walletConnection);
         this.pool = new FluxPool(this.protocol, this.tokens);
         this.market = new FluxMarket(this.protocol, this.tokens);
     }
@@ -164,6 +166,18 @@ export default class FluxSdk {
         isScalar?: boolean,
     }) {
         return this.market?.createMarket(market);
+    }
+
+    /**
+     * Fetches the oracle config
+     * Can be used to see what the current validity bond is
+     *
+     * @return {Promise<OracleConfig>}
+     * @memberof FluxSdk
+     */
+    async getOracleConfig(): Promise<OracleConfig> {
+        if (!this.walletConnection) throw new Error('Not connected');
+        return getOracleConfig(this.sdkConfig, this.walletConnection);
     }
 
     /**
@@ -448,4 +462,4 @@ export default class FluxSdk {
 
 // Some models for exporting
 export { DateMetric, FluxTransactionType };
-export type { FluxTransaction, ParticipatedMarket };
+export type { FluxTransaction, ParticipatedMarket, OracleConfig };

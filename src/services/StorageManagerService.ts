@@ -15,8 +15,8 @@ export async function getMinimumStorage(contractId: string, walletConnection: Wa
     try {
         const result = await cache(`${contractId}_minimum_storage_balance`, async () => {
             const account = walletConnection.account();
-            const minimumBalance = await account.viewFunction(contractId, 'storage_minimum_balance', {});
-            return Big(minimumBalance);
+            const minimumBalance = await account.viewFunction(contractId, 'storage_balance_bounds', {});
+            return Big(minimumBalance.min);
         });
 
         return result;
@@ -41,8 +41,8 @@ export async function getStorageBalance(contractId: string, accountId: string, w
         });
 
         return {
-            total: new Big(storage.total),
-            available: new Big(storage.available),
+            total: storage ? new Big(storage.total) : new Big(0),
+            available: storage ? new Big(storage.available) : new Big(0),
         };
     } catch (error) {
         console.error('[getStorageBalance]', error);
@@ -72,7 +72,7 @@ export async function createStorageTransaction(contractId: string, accountId: st
         return {
             receiverId: contractId,
             transactionOptions: [{
-                amount: storageRequired.toString(),
+                amount: storageRequired.sub(storageBalance.total).toString(),
                 gas: MAX_GAS.toString(),
                 methodName: 'storage_deposit',
                 args: {

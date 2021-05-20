@@ -4,6 +4,7 @@ import { toToken } from "./services/TokenService";
 Big.PE = 1000000;
 
 export const DEFAULT_GRAPH_API_URL = 'https://api.flux.xyz/graphql';
+export const DEFAULT_ORACLE_GRAPH_API_URL = 'https://testnet-oracle.flux.xyz/graphql';
 export const DEFAULT_PROTOCOL_CONTRACT_ID = 'beta-amm.flux-dev';
 export const DEFAULT_ORACLE_CONTRACT_ID = 'oracle.flux-dev';
 export const DEFAULT_NETWORK = 'testnet';

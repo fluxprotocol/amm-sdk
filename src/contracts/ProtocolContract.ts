@@ -53,11 +53,13 @@ export class ProtocolContract {
         isScalar: boolean,
     ) {
         const transactions: TransactionOption[] = [];
+        // TODO: This is overkill
+        const storageRequired = STORAGE_BASE.mul(outcomes.length);
 
         // Fetch Oracle Bond size
         const oracleConfig = await getOracleConfig(this.sdkConfig, this.walletConnection);
-        const ammStorageTransaction = await createStorageTransaction(this.sdkConfig.protocolContractId, this.account.accountId, this.walletConnection);
-        const oracleStorageTranscation = await createStorageTransaction(this.sdkConfig.oracleContractId, this.account.accountId, this.walletConnection)
+        const ammStorageTransaction = await createStorageTransaction(this.sdkConfig.protocolContractId, this.account.accountId, this.walletConnection, storageRequired);
+        const oracleStorageTranscation = await createStorageTransaction(this.sdkConfig.oracleContractId, this.account.accountId, this.walletConnection, storageRequired);
 
         if (ammStorageTransaction) {
             transactions.push(ammStorageTransaction);

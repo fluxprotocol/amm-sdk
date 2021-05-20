@@ -25,8 +25,9 @@ import { TransactionParams } from "./models/TransactionParams";
 import { getTransactions, GetTransactionsParams } from "./services/TransactionService";
 import { FluxTransaction, FluxTransactionType } from "./models/FluxTransaction";
 import { ParticipatedMarket } from "./models/ParticipatedMarket";
-import { getOracleConfig } from "./services/OracleService";
+import { getDataRequest, getOracleConfig } from "./services/OracleService";
 import { OracleConfig } from "./models/OracleConfig";
+import { DataRequest } from "./models/DataRequest";
 
 export default class FluxSdk {
     sdkConfig: SdkConfig;
@@ -436,6 +437,20 @@ export default class FluxSdk {
     }
 
     /**
+     * Fetches the data request associated with the market
+     *
+     * @param {string} marketId
+     * @return {string}
+     * @memberof FluxSdk
+     */
+    async getOracleDataRequest(marketId: string) {
+        return getDataRequest(this.sdkConfig, {
+            tags: [marketId],
+            requestor: this.sdkConfig.protocolContractId,
+        });
+    }
+
+    /**
      * Querys the GraphQL server
      * Usefull when the default given querys are not enough and you want to fine tune your data
      *
@@ -462,4 +477,4 @@ export default class FluxSdk {
 
 // Some models for exporting
 export { DateMetric, FluxTransactionType };
-export type { FluxTransaction, ParticipatedMarket, OracleConfig };
+export type { FluxTransaction, ParticipatedMarket, OracleConfig, DataRequest };

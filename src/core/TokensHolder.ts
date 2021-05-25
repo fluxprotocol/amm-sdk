@@ -1,4 +1,4 @@
-import { Account } from "near-api-js";
+import { Account, WalletConnection } from "near-api-js";
 import TokenContract from "../contracts/TokenContract";
 import { SdkConfig } from "../models/SdkConfig";
 import { TokenMetadata } from "../models/TokenMetadata";
@@ -8,10 +8,12 @@ export default class TokensHolder {
     metadata: Map<string, TokenMetadata> = new Map();
     private account: Account;
     private sdkConfig: SdkConfig;
+    private walletConnection: WalletConnection;
 
-    constructor(account: Account, sdkConfig: SdkConfig) {
+    constructor(account: Account, sdkConfig: SdkConfig, walletConnection: WalletConnection) {
         this.account = account;
         this.sdkConfig = sdkConfig;
+        this.walletConnection = walletConnection;
     }
 
     /**
@@ -28,7 +30,7 @@ export default class TokensHolder {
         let tokenContract = this.tokens.get(collateralTokenId);
 
         if (!tokenContract) {
-            tokenContract = new TokenContract(this.account, collateralTokenId, this.sdkConfig);
+            tokenContract = new TokenContract(this.account, collateralTokenId, this.sdkConfig, this.walletConnection);
             this.tokens.set(collateralTokenId, tokenContract);
         }
 

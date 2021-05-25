@@ -78,7 +78,7 @@ export default class FluxSdk {
         this.walletConnection = connectConfig.walletInstance ?? new WalletConnection(this.near, this.sdkConfig.nullContractId);
         const nearAccount = this.walletConnection.account();
 
-        this.tokens = new TokensHolder(nearAccount, this.sdkConfig);
+        this.tokens = new TokensHolder(nearAccount, this.sdkConfig, this.walletConnection);
         this.account = new FluxAccount(this.tokens, this.walletConnection, this.sdkConfig);
         this.protocol = new ProtocolContract(nearAccount, this.sdkConfig, this.walletConnection);
         this.pool = new FluxPool(this.protocol, this.tokens);

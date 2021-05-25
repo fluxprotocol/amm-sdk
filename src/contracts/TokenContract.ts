@@ -1,15 +1,18 @@
-import { Account, Contract } from "near-api-js";
+import { Account, Contract, WalletConnection } from "near-api-js";
 import { MAX_GAS, STORAGE_BASE } from "../config";
 import { SdkConfig } from "../models/SdkConfig";
 import { TokenMetadata } from "../models/TokenMetadata";
 import { TransactionParams } from "../models/TransactionParams";
+import { createStorageTransaction } from "../services/StorageManagerService";
 
 export default class TokenContract {
     contract: Contract;
     sdkConfig: SdkConfig;
+    walletConnection: WalletConnection;
 
-    constructor(account: Account, tokenAccountId: string, sdkConfig: SdkConfig) {
+    constructor(account: Account, tokenAccountId: string, sdkConfig: SdkConfig, walletConnection: WalletConnection) {
         this.sdkConfig = sdkConfig;
+        this.walletConnection = walletConnection;
         this.contract = new Contract(account, tokenAccountId, {
             viewMethods: ['ft_balance_of', 'ft_metadata'],
             changeMethods: ['ft_transfer_call'],
@@ -29,7 +32,7 @@ export default class TokenContract {
     async transferCall(amount: string, msg: string, txParams?: TransactionParams): Promise<void> {
         const finalTxParams: TransactionParams = {
             gas: MAX_GAS.toString(),
-            value: STORAGE_BASE.toString(),
+            value: '1',
             ...txParams,
         };
 

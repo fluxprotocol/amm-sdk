@@ -9,6 +9,7 @@ export interface SdkConfig {
     protocolContractId: string;
     oracleContractId: string;
     nullContractId: string;
+    defaultChallengePeriod: string;
     network: 'testnet' | 'mainnet' | 'custom';
     keyStore: keyStores.BrowserLocalStorageKeyStore | keyStores.UnencryptedFileSystemKeyStore | keyStores.InMemoryKeyStore;
 }
@@ -22,5 +23,7 @@ export function createSdkConfig(config: Partial<SdkConfig>): SdkConfig {
         network: config.network ?? DEFAULT_NETWORK,
         protocolContractId: config.protocolContractId ?? DEFAULT_PROTOCOL_CONTRACT_ID,
         nullContractId: config.nullContractId ?? NULL_CONTRACT,
+        // 12 hours in nano seconds
+        defaultChallengePeriod: config.defaultChallengePeriod ?? '43200000000000',
     }
 }

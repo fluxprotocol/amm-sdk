@@ -51,6 +51,7 @@ export class ProtocolContract {
         swapFee: string,
         collateralTokenId: string,
         isScalar: boolean,
+        challengePeriod?: string,
     ) {
         const transactions: TransactionOption[] = [];
         // TODO: This is overkill
@@ -60,6 +61,18 @@ export class ProtocolContract {
         const oracleConfig = await getOracleConfig(this.sdkConfig, this.walletConnection);
         const ammStorageTransaction = await createStorageTransaction(this.sdkConfig.protocolContractId, this.account.accountId, this.walletConnection, storageRequired);
         const oracleStorageTranscation = await createStorageTransaction(this.sdkConfig.oracleContractId, this.account.accountId, this.walletConnection, storageRequired);
+        let finalchallengePeriod = new Big(challengePeriod ?? this.sdkConfig.defaultChallengePeriod);
+
+        // Make sure our challenge period is within the bounds of the oracle config
+        // 3 is our maximum period multiplier used in the oracle contract
+        const maxPeriod = new Big(oracleConfig.default_challenge_window_duration).mul(3);
+        const minPeriod = new Big(oracleConfig.min_initial_challenge_window_duration);
+
+        if (finalchallengePeriod.gt(maxPeriod)) {
+            finalchallengePeriod = maxPeriod;
+        } else if (finalchallengePeriod.lt(minPeriod)) {
+            finalchallengePeriod = minPeriod;
+        }
 
         if (ammStorageTransaction) {
             transactions.push(ammStorageTransaction);
@@ -90,6 +103,7 @@ export class ProtocolContract {
                             categories,
                             swap_fee: swapFee,
                             is_scalar: isScalar,
+                            challenge_period: finalchallengePeriod.toString(),
                         },
                     }),
                 },

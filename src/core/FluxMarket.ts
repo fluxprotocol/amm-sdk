@@ -59,8 +59,7 @@ export default class FluxMarket {
         const tokenContract = this.tokens.getTokenContract(params.collateralTokenId);
 
         const payload = JSON.stringify({
-            function: 'buy',
-            args: {
+            BuyArgs: {
                 market_id: params.marketId,
                 outcome_target: params.outcomeId,
                 min_shares_out: minSharesOut,

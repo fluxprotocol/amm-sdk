@@ -29,11 +29,10 @@ export default class FluxPool {
         }
 
         const payload = JSON.stringify({
-            function: "add_liquidity",
-            args: {
+            AddLiquidityArgs: {
                 market_id: marketId,
                 weight_indication: weightIndication.length ? weightIndication : null,
-            }
+            },
         });
 
         return tokenContract.transferCall(amountIn, payload, {

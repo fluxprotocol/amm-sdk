@@ -15,13 +15,15 @@ sdkInstance.createMarket(marketParams: MarketParams);
 |Key|Type|Description
 |---|---|---|
 |description|string|The description of the market. This is the question that is presented to the user.
-|endDate|Date|The end date of the market.
+|endDate|Date|The end date of the market. This will close the market for trading, it will not resolve it.
+|resolutionDate|Date| The date the market should be resolved. Defaults to the same as `endDate`.
 |extraInfo|string|The information used to resolute the market. Mostly used for the oracle. But also very handy for users.
 |outcomes|string[]|An array of outcomes.
 |categories|string[]| The categories this market belongs to. Is used for filtering. You should also include your app name (or an encoded name) in order to filter markets only for your app.
 |collateralTokenId|string| The collateral token you want to use for trading. This only allows tokens that are whitelisted by the Flux Protocol.
 |swapFee|string|Fee per swap that goes to liquidity providers. Denom in collateral token decimals.
 |isScalar|boolean|Whether a market is a scalar market or not.
+|challengePeriod| string | How long a challenge will take on the oracle in nano seconds (defaults to `43200000000000` or 12 hours)
 
 ## Categorical market
 

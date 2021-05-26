@@ -1,6 +1,7 @@
 # createMarket
 
-Allows you to create either a categorical or scalar market. 
+Allows you to create either a categorical or scalar market. Handles all logic for sending the right amount of bond and any deposits any storage requirements.
+
 
 ```TypeScript
 sdkInstance.createMarket(marketParams: MarketParams);

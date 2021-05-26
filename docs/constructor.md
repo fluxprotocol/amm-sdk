@@ -16,3 +16,5 @@ const sdkMainNet = new FluxSdk({
 |network|string|NEAR network type|testnet|
 |keyStore|KeyStore|Custom KeyStore object, this is where signIn credentials are stored. Defaults to browser's local storage, which works only for every web application. This parameter should only be required for custom solutions that don't have access to thewindow object.| BrowserLocalStorageKeyStore() |
 |nullContractId|string|Contract that is used to sign in with, this allows every transaction to be explicitly be approved|null_contract.flux-dev|
+|oracleGraphApiUrl|string| Oracle GraphQL API URL | https://testnet-oracle.flux.xyz/graphql
+| oracleContractId | string | The Flux Oracle contract id | oracle.flux-dev

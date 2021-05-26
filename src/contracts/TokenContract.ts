@@ -3,16 +3,19 @@ import { MAX_GAS, STORAGE_BASE } from "../config";
 import { SdkConfig } from "../models/SdkConfig";
 import { TokenMetadata } from "../models/TokenMetadata";
 import { TransactionParams } from "../models/TransactionParams";
+import { batchSendTransactions, TransactionOption } from "../services/NearService";
 import { createStorageTransaction } from "../services/StorageManagerService";
 
 export default class TokenContract {
     contract: Contract;
     sdkConfig: SdkConfig;
     walletConnection: WalletConnection;
+    tokenAccountId: string;
 
     constructor(account: Account, tokenAccountId: string, sdkConfig: SdkConfig, walletConnection: WalletConnection) {
         this.sdkConfig = sdkConfig;
         this.walletConnection = walletConnection;
+        this.tokenAccountId = tokenAccountId;
         this.contract = new Contract(account, tokenAccountId, {
             viewMethods: ['ft_balance_of', 'ft_metadata'],
             changeMethods: ['ft_transfer_call'],
@@ -30,17 +33,34 @@ export default class TokenContract {
     }
 
     async transferCall(amount: string, msg: string, txParams?: TransactionParams): Promise<void> {
+        const tokenReceiver = this.sdkConfig.protocolContractId;
         const finalTxParams: TransactionParams = {
             gas: MAX_GAS.toString(),
             value: '1',
             ...txParams,
         };
 
-        // @ts-ignore
-        return this.contract.ft_transfer_call({
-            receiver_id: this.sdkConfig.protocolContractId,
-            amount,
-            msg,
-        }, finalTxParams.gas, finalTxParams.value);
+        const transactions: TransactionOption[] = [];
+        const storageTransaction = await createStorageTransaction(tokenReceiver, this.walletConnection.getAccountId(), this.walletConnection);
+
+        if (storageTransaction) {
+            transactions.push(storageTransaction);
+        }
+
+        transactions.push({
+            receiverId: this.tokenAccountId,
+            transactionOptions: [{
+                amount: finalTxParams.value!,
+                gas: finalTxParams.gas!,
+                methodName: 'ft_transfer_call',
+                args: {
+                    receiver_id: tokenReceiver,
+                    amount,
+                    msg,
+                },
+            }],
+        });
+
+        await batchSendTransactions(this.walletConnection, transactions);
     }
 }

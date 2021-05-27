@@ -54,8 +54,7 @@ export class ProtocolContract {
         challengePeriod?: string,
     ) {
         const transactions: TransactionOption[] = [];
-        // TODO: This is overkill
-        const storageRequired = STORAGE_BASE.mul(outcomes.length);
+        const storageRequired = STORAGE_BASE.mul(outcomes.length + 1);
 
         // Fetch Oracle Bond size
         const oracleConfig = await getOracleConfig(this.sdkConfig, this.walletConnection);
@@ -104,6 +103,7 @@ export class ProtocolContract {
                             swap_fee: swapFee,
                             is_scalar: isScalar,
                             challenge_period: finalchallengePeriod.toString(),
+                            sources: [],
                         },
                     }),
                 },

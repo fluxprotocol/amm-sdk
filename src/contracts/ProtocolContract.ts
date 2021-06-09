@@ -59,7 +59,7 @@ export class ProtocolContract {
         // Fetch Oracle Bond size
         const oracleConfig = await getOracleConfig(this.sdkConfig, this.walletConnection);
         const ammStorageTransaction = await createStorageTransaction(this.sdkConfig.protocolContractId, this.account.accountId, this.walletConnection, storageRequired);
-        const oracleStorageTranscation = await createStorageTransaction(this.sdkConfig.oracleContractId, this.account.accountId, this.walletConnection, storageRequired);
+        const oracleStorageTransaction = await createStorageTransaction(this.sdkConfig.oracleContractId, this.account.accountId, this.walletConnection, storageRequired);
         let finalchallengePeriod = new Big(challengePeriod ?? this.sdkConfig.defaultChallengePeriod);
 
         // Make sure our challenge period is within the bounds of the oracle config
@@ -77,8 +77,8 @@ export class ProtocolContract {
             transactions.push(ammStorageTransaction);
         }
 
-        if (oracleStorageTranscation) {
-            transactions.push(oracleStorageTranscation);
+        if (oracleStorageTransaction) {
+            transactions.push(oracleStorageTransaction);
         }
 
         transactions.push({

@@ -68,11 +68,11 @@ export async function createStorageTransaction(contractId: string, accountId: st
     const storageBalance = await getStorageBalance(contractId, accountId, walletConnection);
     const storageRequired = minimumStorageRequired.add(extraStorage);
 
-    if (storageBalance.total.lt(storageRequired)) {
+    if (storageBalance.available.lt(storageRequired)) {
         return {
             receiverId: contractId,
             transactionOptions: [{
-                amount: storageRequired.sub(storageBalance.total).toString(),
+                amount: storageRequired.sub(storageBalance.available).toString(),
                 gas: MAX_GAS.toString(),
                 methodName: 'storage_deposit',
                 args: {

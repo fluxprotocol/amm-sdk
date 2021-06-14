@@ -13,3 +13,4 @@ export { default as calcPrice } from '../utils/calcPrice';
 export { default as computeBalanceAfterSharePurchase } from '../utils/computeBalanceAfterSharePurchase';
 export { default as computeBalanceAfterShareSale } from '../utils/computeBalanceAfterShareSale';
 export { default as computeBalanceAfterTrade } from '../utils/computeBalanceAfterTrade';
+export { getMinimumStorage, getStorageBalance, createStorageTransaction } from '../services/StorageManagerService';

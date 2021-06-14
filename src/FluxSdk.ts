@@ -478,4 +478,4 @@ export default class FluxSdk {
 
 // Some models for exporting
 export { DateMetric, FluxTransactionType };
-export type { FluxTransaction, ParticipatedMarket, OracleConfig, DataRequest };
+export type { FluxTransaction, ParticipatedMarket, OracleConfig, DataRequest, Pagination };

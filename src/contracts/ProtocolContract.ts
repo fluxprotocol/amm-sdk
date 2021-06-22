@@ -51,6 +51,7 @@ export class ProtocolContract {
         swapFee: string,
         collateralTokenId: string,
         isScalar: boolean,
+        scalarMultiplier: string,
         challengePeriod?: string,
     ) {
         const transactions: TransactionOption[] = [];
@@ -81,6 +82,15 @@ export class ProtocolContract {
             transactions.push(oracleStorageTransaction);
         }
 
+        let finalOutcomes = outcomes;
+
+        if (isScalar) {
+            // TODO: We need to change this later for negative numbers
+            finalOutcomes = outcomes.map((outcome) => {
+                return new Big(outcome).mul(scalarMultiplier).toString();
+            });
+        }
+
         transactions.push({
             receiverId: oracleConfig.bond_token,
             transactionOptions: [{
@@ -95,13 +105,14 @@ export class ProtocolContract {
                             description,
                             extra_info: extraInfo,
                             outcomes: outcomes.length,
-                            outcome_tags: outcomes,
+                            outcome_tags: finalOutcomes,
                             resolution_time: resolutionDate.getTime().toString(),
                             end_time: endDate.getTime().toString(),
                             collateral_token_id: collateralTokenId,
                             categories,
                             swap_fee: swapFee,
                             is_scalar: isScalar,
+                            scalar_multiplier: isScalar ? scalarMultiplier : undefined,
                             challenge_period: finalchallengePeriod.toString(),
                             sources: [],
                         },

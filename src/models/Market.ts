@@ -12,6 +12,7 @@ export interface MarketGraphData {
     is_scalar: boolean;
     creation_date: string;
     payout_numerator: string[] | null;
+    scalar_multiplier: string;
 
     pool: {
         owner: string;

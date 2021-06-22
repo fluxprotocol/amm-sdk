@@ -165,8 +165,13 @@ export default class FluxSdk {
         swapFee?: string,
         collateralTokenId?: string,
         isScalar?: boolean,
+        scalarMultiplier?: string,
         challengePeriod?: string,
     }) {
+        if (market.isScalar && !market.scalarMultiplier) {
+            throw new Error('No scalarMultiplier given while isScalar is true');
+        }
+
         return this.market?.createMarket(market);
     }
 

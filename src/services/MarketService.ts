@@ -42,6 +42,7 @@ export async function getMarkets(sdkConfig: SdkConfig, filters: MarketFilters): 
                             is_scalar
                             categories
                             creation_date
+                            scalar_multiplier
                         }
                         total
                     }
@@ -93,6 +94,7 @@ export async function getMarketById(sdkConfig: SdkConfig, marketId: string, acco
                     creation_date
                     payout_numerator
                     is_scalar
+                    scalar_multiplier
                     claimed_earnings(accountId: $accountId) {
                         payout
                     }
@@ -142,6 +144,7 @@ export async function getEscrowStatus(sdkConfig: SdkConfig, accountId: string, m
 
 export interface MarketPoolBalancesResponse {
     is_scalar: boolean;
+    scalar_multiplier: string;
     outcome_tags: string[];
     pool: {
         pool_balances: {
@@ -170,6 +173,7 @@ export async function getMarketPoolBalances(sdkConfig: SdkConfig, marketId: stri
                     }
                     outcome_tags
                     is_scalar
+                    scalar_multiplier
                 }
             }
 

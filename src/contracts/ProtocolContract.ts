@@ -82,13 +82,24 @@ export class ProtocolContract {
             transactions.push(oracleStorageTransaction);
         }
 
-        let finalOutcomes = outcomes;
+        let finalOutcomes: object[] = [];
 
         if (isScalar) {
-            // TODO: We need to change this later for negative numbers
             finalOutcomes = outcomes.map((outcome) => {
-                return new Big(outcome).mul(scalarMultiplier).toString();
+                const value = new Big(outcome).mul(scalarMultiplier);
+
+                return {
+                    Number: {
+                        value: value.toString(),
+                        negative: value.lt(0),
+                        multiplier: scalarMultiplier,
+                    }
+                };
             });
+        } else {
+            finalOutcomes = outcomes.map((outcome) => ({
+                String: outcome,
+            }));
         }
 
         transactions.push({
